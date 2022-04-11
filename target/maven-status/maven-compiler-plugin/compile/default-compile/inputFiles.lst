@@ -1,0 +1,6 @@
+/Users/alexkosa/Desktop/SimpleBNB/src/main/java/org/loose/fis/sre/model/User.java
+/Users/alexkosa/Desktop/SimpleBNB/src/main/java/org/loose/fis/sre/exceptions/UsernameAlreadyExistsException.java
+/Users/alexkosa/Desktop/SimpleBNB/src/main/java/org/loose/fis/sre/Main.java
+/Users/alexkosa/Desktop/SimpleBNB/src/main/java/org/loose/fis/sre/services/FileSystemService.java
+/Users/alexkosa/Desktop/SimpleBNB/src/main/java/org/loose/fis/sre/controllers/RegistrationController.java
+/Users/alexkosa/Desktop/SimpleBNB/src/main/java/org/loose/fis/sre/services/UserService.java

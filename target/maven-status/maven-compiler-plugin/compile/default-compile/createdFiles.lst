@@ -1,0 +1,6 @@
+org/loose/fis/sre/controllers/RegistrationController.class
+org/loose/fis/sre/Main.class
+org/loose/fis/sre/services/UserService.class
+org/loose/fis/sre/model/User.class
+org/loose/fis/sre/exceptions/UsernameAlreadyExistsException.class
+org/loose/fis/sre/services/FileSystemService.class
