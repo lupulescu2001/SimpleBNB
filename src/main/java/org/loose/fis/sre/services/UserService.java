@@ -4,7 +4,7 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.model.User;
-
+import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -61,5 +61,23 @@ public class UserService {
         return md;
     }
 
-
+    public static int CheckUserCredentials(String username, String password, String role) throws IncorrectCredentials
+    {
+        String pass=encodePassword(username,password);
+        for (User user : userRepository.find()) {
+            if (Objects.equals(username, user.getUsername()) && Objects.equals(role,user.getRole()) && pass.equals(user.getPassword()))
+            {
+                if(role.equals("Client"))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+        }
+        throw new IncorrectCredentials(username);
+    }
 }
+
