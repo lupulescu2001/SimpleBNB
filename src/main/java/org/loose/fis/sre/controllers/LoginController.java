@@ -9,25 +9,19 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.services.UserService;
 import java.io.IOException;
 
-public class RegistrationController {
+public class LoginController {
 
     @FXML
-    private Text registrationMessage;
+    private Text loginMessage;
     @FXML
     private PasswordField passwordField;
     @FXML
     private TextField usernameField;
-
-    @FXML
-    private TextField fullNameField;
-
-    @FXML
-    private TextField phoneNumberField;
-
     @FXML
     private ChoiceBox role;
 
@@ -38,10 +32,10 @@ public class RegistrationController {
     }
 
     @FXML
-    public void handleRegisterAction() {
+    public void handleLoginAction() {
         try {
-            UserService.addUser(fullNameField.getText(),phoneNumberField.getText(),usernameField.getText(), passwordField.getText(), (String) role.getValue());
-            registrationMessage.setText("Account created successfully!");
+            UserService.CheckUserCredentials(usernameField.getText(), passwordField.getText(), (String) role.getValue());
+            loginMessage.setText("Login successfully!");
             Parent root;
             try {
                 root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
@@ -55,8 +49,9 @@ public class RegistrationController {
             {
                 e.printStackTrace();
             }
-        } catch (UsernameAlreadyExistsException e) {
-            registrationMessage.setText(e.getMessage());
+        } catch (IncorrectCredentials e) {
+            loginMessage.setText(e.getMessage());
         }
     }
 }
+
