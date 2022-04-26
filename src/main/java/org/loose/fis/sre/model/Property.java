@@ -5,6 +5,7 @@ import org.dizitart.no2.objects.Id;
 import java.util.Objects;
 
 public class Property {
+    @Id
     private String cityName;
     private String description;
     private String username;

@@ -14,5 +14,8 @@
     <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="3">
         <Button onAction="#handleAddPropertyAction" text="Add Property" />
     </HBox>
+    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+        <Button onAction="#handleChangeDescriptionAction" text="Change Description" />
+    </HBox>
 
 </GridPane>
