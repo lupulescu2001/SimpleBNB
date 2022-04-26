@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" prefHeight="400" prefWidth="600"
-          vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal"
-          fx:controller="org.loose.fis.sre.controllers.OpenPropertiesController">
-    <padding>
-        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
-    </padding>
-    <Text id="title-text" text="SimpleBNB Owner" GridPane.columnIndex="0" GridPane.columnSpan="2"
-          GridPane.rowIndex="0"/>
+<?import javafx.scene.text.*?>
 
-    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <Button onAction="#handleAddPropertyAction" text="Add Property"/>
+<GridPane alignment="center" hgap="10" prefHeight="399.0" prefWidth="607.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.OpenPropertiesController">
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+    <Text id="title-text" text="SimpleBNB Owner" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+    <ListView fx:id="listView" layoutY="30" prefWidth="600" prefHeight="100"/>
+    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+        <Button onAction="#handleAddPropertyAction" text="Add Property" />
     </HBox>
 
 </GridPane>
-

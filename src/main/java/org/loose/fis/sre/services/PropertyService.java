@@ -2,14 +2,15 @@ package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.jetbrains.annotations.NotNull;
 import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
 import org.loose.fis.sre.model.Property;
+import org.loose.fis.sre.model.User;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
-import java.util.List;
+import java.util.*;
 
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
 
@@ -33,5 +34,13 @@ public class PropertyService {
             if (Objects.equals(name, property.getName()))
                 throw new PropertyAlreadyExistsException(name);
         }
+    }
+    public static List<String> getAllProperties(String username){
+        List<String> list = new ArrayList<String>();
+        for (Property property : propertyRepository.find()) {
+            if (Objects.equals(username, property.getUsername()))
+                list.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription());
+        }
+        return list;
     }
 }
