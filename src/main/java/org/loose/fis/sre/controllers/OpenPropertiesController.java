@@ -61,5 +61,22 @@ public class OpenPropertiesController {
             e.printStackTrace();
         }
     }
+    public void handleDeletePropertyAction() {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deleteProperty.fxml"));
+            String username = this.username;
+            root = loader.load();
+            DeletePropertyController deletePropertyController = loader.getController();
+            deletePropertyController.setUsername(username);
+            //root = FXMLLoader.load(getClass().getClassLoader().getResource("openAddProperty.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("SimpleBNB Property Page");
+            stage.setScene(new Scene(root, 600, 575));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
