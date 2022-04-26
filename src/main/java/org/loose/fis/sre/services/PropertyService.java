@@ -1,15 +1,17 @@
 package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.objects.Id;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.jetbrains.annotations.NotNull;
 import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
 import org.loose.fis.sre.model.Property;
-
+import org.loose.fis.sre.model.User;
+import org.loose.fis.sre.exceptions.PropertyDoesNotExistException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
-import java.util.List;
+import java.util.*;
 
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
 
@@ -33,5 +35,25 @@ public class PropertyService {
             if (Objects.equals(name, property.getName()))
                 throw new PropertyAlreadyExistsException(name);
         }
+    }
+    public static List<String> getAllProperties(String username){
+        List<String> list = new ArrayList<String>();
+        for (Property property : propertyRepository.find()) {
+            if (Objects.equals(username, property.getUsername()))
+                list.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription());
+        }
+        return list;
+    }
+    public static void changeDescription(String name, String username, String description) throws PropertyDoesNotExistException {
+        int ok = 0;
+        for (Property property : propertyRepository.find()) {
+            if (Objects.equals(username, property.getUsername()) && Objects.equals(name, property.getName())) {
+                property.setDescription(description);
+                propertyRepository.update(property);
+                ok = 1;
+            }
+        }
+        if (ok == 0)
+            throw new PropertyDoesNotExistException(name);
     }
 }
