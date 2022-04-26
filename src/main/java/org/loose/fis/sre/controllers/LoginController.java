@@ -13,6 +13,8 @@ import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.services.UserService;
 import java.io.IOException;
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
 
 public class LoginController {
 
@@ -37,13 +39,22 @@ public class LoginController {
             UserService.CheckUserCredentials(usernameField.getText(), passwordField.getText(), (String) role.getValue());
             loginMessage.setText("Login successfully!");
             Parent root;
+            String roleValue = (String) role.getValue();
             try {
-                root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
+                if (roleValue == "Owner") {
+                    //root = FXMLLoader.load(getClass().getClassLoader().getResource("openOwner.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/openOwner.fxml"));
+                    String username = usernameField.getText();
+                    root = (Parent) loader.load();
+                    OpenOwnerController openOwnerController = loader.getController();
+                    openOwnerController.setUsername(username);
+                }
+                else
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
                 Stage stage=new Stage();
                 stage.setTitle("SimpleBNB");
                 stage.setScene(new Scene(root,600,575));
                 stage.show();
-
             }
             catch(IOException e)
             {
