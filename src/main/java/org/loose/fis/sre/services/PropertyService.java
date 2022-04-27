@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import org.dizitart.no2.objects.filters.ObjectFilters;
 
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
 
@@ -50,6 +51,17 @@ public class PropertyService {
             if (Objects.equals(username, property.getUsername()) && Objects.equals(name, property.getName())) {
                 property.setDescription(description);
                 propertyRepository.update(property);
+                ok = 1;
+            }
+        }
+        if (ok == 0)
+            throw new PropertyDoesNotExistException(name);
+    }
+    public static void deleteProperty(String name, String username) throws PropertyDoesNotExistException {
+        int ok = 0;
+        for (Property property : propertyRepository.find()) {
+            if (Objects.equals(username, property.getUsername()) && Objects.equals(name, property.getName())) {
+                propertyRepository.remove(property);
                 ok = 1;
             }
         }
