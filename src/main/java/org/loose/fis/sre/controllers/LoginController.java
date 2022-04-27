@@ -50,7 +50,7 @@ public class LoginController {
                     openOwnerController.setUsername(username);
                 }
                 else
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("openClient.fxml"));
                 Stage stage=new Stage();
                 stage.setTitle("SimpleBNB");
                 stage.setScene(new Scene(root,600,575));
