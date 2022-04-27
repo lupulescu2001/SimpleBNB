@@ -45,6 +45,16 @@ public class PropertyService {
         }
         return list;
     }
+    public static List<String> getAllPropertiesByName(List<String> list){
+        List<String> sol = new ArrayList<String>();
+        for(String x : list)
+        for (Property property : propertyRepository.find()) {
+            if (Objects.equals(x, property.getName()))
+                sol.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription());
+        }
+        return sol;
+    }
+
     public static void changeDescription(String name, String username, String description) throws PropertyDoesNotExistException {
         int ok = 0;
         for (Property property : propertyRepository.find()) {

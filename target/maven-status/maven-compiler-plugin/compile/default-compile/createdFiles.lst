@@ -1,4 +1,5 @@
 org/loose/fis/sre/exceptions/NoPropertyInThisCity.class
 org/loose/fis/sre/exceptions/NoPropertyAvailable.class
 org/loose/fis/sre/controllers/OpenClientController.class
+org/loose/fis/sre/controllers/AvailableAccommodationsController.class
 org/loose/fis/sre/controllers/SearchAccommodationController.class
