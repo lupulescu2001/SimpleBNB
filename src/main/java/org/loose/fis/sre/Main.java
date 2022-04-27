@@ -9,6 +9,7 @@ import org.loose.fis.sre.services.FileSystemService;
 import org.loose.fis.sre.services.PropertyService;
 import org.loose.fis.sre.services.UserService;
 import org.loose.fis.sre.services.PropertyUnavailableService;
+import org.loose.fis.sre.services.BookingRequestService;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +22,7 @@ public class Main extends Application {
         UserService.initDatabase();
         PropertyService.initDatabase();
         PropertyUnavailableService.initDatabase();
+        BookingRequestService.initDatabase();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("openapp.fxml"));
         primaryStage.setTitle("SimpleBNB");
         primaryStage.setScene(new Scene(root, 600, 575));
