@@ -20,5 +20,8 @@
     <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="5">
         <Button onAction="#handleDeletePropertyAction" text="Delete Property" />
     </HBox>
+    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="6">
+        <Button onAction="#handleMakeUnavailableAction" text="Make Unavailable" />
+    </HBox>
 
 </GridPane>

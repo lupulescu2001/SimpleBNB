@@ -78,5 +78,23 @@ public class OpenPropertiesController {
             e.printStackTrace();
         }
     }
+    public void handleMakeUnavailableAction() {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/makeUnavailable.fxml"));
+            String username = this.username;
+            root = loader.load();
+            MakeUnavailableController makeUnavailableController = loader.getController();
+            makeUnavailableController.setUsername(username);
+            //root = FXMLLoader.load(getClass().getClassLoader().getResource("openAddProperty.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("SimpleBNB Make Unavailable Page");
+            stage.setScene(new Scene(root, 600, 575));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 
