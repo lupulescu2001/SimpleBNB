@@ -68,4 +68,7 @@ public class PropertyService {
         if (ok == 0)
             throw new PropertyDoesNotExistException(name);
     }
+    public static List<Property> getAll(){
+        return propertyRepository.find().toList();
+    }
 }
