@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" prefHeight="400" prefWidth="600"
+          vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal"
+          fx:controller="org.loose.fis.sre.controllers.SearchAccommodationController">
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+    <Text id="title-text" text="Enter accommodation's details" GridPane.columnIndex="0" GridPane.columnSpan="2"
+          GridPane.rowIndex="0"/>
+
+    <Label text="City name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+    <TextField fx:id="citynameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Check-in day :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+    <TextField fx:id="checkindayField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Check-in month :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+
+    <TextField fx:id="checkinmonthField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Check-in year :" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+
+    <TextField fx:id="checkinyearField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <Label text="Check-out day :" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+
+    <TextField fx:id="checkoutdayField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <Label text="Check-out month :" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+
+    <TextField fx:id="checkoutmonthField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <Label text="Check-out year :" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+
+    <TextField fx:id="checkoutyearField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+    <Text fx:id="message" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="10">
+        <Button onAction="#handleClickSearch" text="Search"/>
+    </HBox>
+
+
+
+</GridPane>
+

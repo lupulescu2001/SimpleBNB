@@ -4,19 +4,17 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.Id;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.jetbrains.annotations.NotNull;
-import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
+import org.loose.fis.sre.exceptions.*;
 import org.loose.fis.sre.model.Property;
 import org.loose.fis.sre.model.PropertyUnavailable;
 import org.loose.fis.sre.model.User;
-import org.loose.fis.sre.exceptions.PropertyDoesNotExistException;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import org.dizitart.no2.objects.filters.ObjectFilters;
 import org.loose.fis.sre.services.PropertyService;
-import org.loose.fis.sre.exceptions.PropertyAlreadyUnavailableException;
-import org.loose.fis.sre.exceptions.IncorrectDateException;
 
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
 
@@ -50,6 +48,7 @@ public class PropertyUnavailableService {
                 throw new PropertyAlreadyUnavailableException(x);
         }
     }
+
     private static void propertyDoesNotExist(PropertyUnavailable x) throws PropertyDoesNotExistException {
         int ok = 0;
         for (Property property : PropertyService.getAll()) {
@@ -59,6 +58,41 @@ public class PropertyUnavailableService {
         if (ok == 0)
             throw new PropertyDoesNotExistException(x.getName());
     }
+
+    public static List<String> searchByCity(String city) throws NoPropertyInThisCity {
+        List<String> list = new ArrayList<>();
+        int ok=0;
+        for(Property prop : PropertyService.getAll()){
+            if(Objects.equals(city,prop.getCityName())){
+                list.add(prop.getName());
+                ok=1;
+            }
+        }
+        if(ok==0)
+            throw new NoPropertyInThisCity(city);
+        return list;
+    }
+    public static List<String> searchbByDate(List<String> x,String inday,String inmonth,String inyear,String outday,String outmonth,String outyear) throws IncorrectDateException,NoPropertyAvailable{
+        List<String> available= new ArrayList<>();
+        PropertyUnavailable p=new PropertyUnavailable(0,"nu","prop",inday,inmonth,inyear,outday,outmonth,outyear);
+        checkDateIsCorrect(p);
+        for(String prop : x) {
+            int ok=1;
+            for (PropertyUnavailable prop_un : propertyUnavailableRepository.find()) {
+                if (Objects.equals(prop, prop_un.getName()) && p.compare(prop_un)==false) {
+                    ok=0;
+                }
+            }
+            if(ok==1)
+                available.add(prop);
+        }
+        if(available.size()==0){
+            throw new NoPropertyAvailable();
+        }
+
+        return available;
+    }
+
     public static List<String> getAllUnavailable(String username) {
         List<String> list = new ArrayList<String>();
         for (PropertyUnavailable propertyUnavailable : propertyUnavailableRepository.find()) {
