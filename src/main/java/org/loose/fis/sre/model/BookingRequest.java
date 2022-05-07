@@ -16,8 +16,9 @@ public class BookingRequest {
     private String checkoutDay;
     private String checkoutMonth;
     private String checkoutYear;
+    private int requestStatus;
 
-    public BookingRequest(int id,String clientusername,String propertyName,String checkinDay,String checkinMonth,String checkinYear,String checkoutDay,String checkoutMonth,String checkoutYear){
+    public BookingRequest(int id,String clientusername,String propertyName,String checkinDay,String checkinMonth,String checkinYear,String checkoutDay,String checkoutMonth,String checkoutYear, int requestStatus){
         this.id=id;
         this.clientusername=clientusername;
         this.propertyName=propertyName;
@@ -27,6 +28,7 @@ public class BookingRequest {
         this.checkoutDay=checkoutDay;
         this.checkoutMonth=checkoutMonth;
         this.checkoutYear=checkoutYear;
+        this.requestStatus = requestStatus; // status = 0 => pending, status = 1 => accepted, status = 2 -> denied
     }
     public BookingRequest(){}
     public int getId(){ return this.id;}
@@ -61,6 +63,14 @@ public class BookingRequest {
 
     public String getPropertyName() {
         return propertyName;
+    }
+
+    public int getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(int requestStatus) {
+        this.requestStatus = requestStatus;
     }
 
     public static int getGlobalId() {

@@ -34,6 +34,10 @@ public class PropertyUnavailableService {
         propertyUnavailableRepository.insert(x);
 
     }
+    public static void bookingToUnavailable(PropertyUnavailable x) throws PropertyAlreadyUnavailableException {
+        propertyAlreadyUnavailable(x);
+        propertyUnavailableRepository.insert(x);
+    }
     private static void checkDateIsCorrect(PropertyUnavailable x) throws IncorrectDateException {
         if (x.date() == false)
             throw new IncorrectDateException(x);
