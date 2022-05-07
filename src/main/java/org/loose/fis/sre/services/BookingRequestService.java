@@ -36,6 +36,25 @@ public class BookingRequestService {
             id= bookingRequest.getId();
         return id;
     }
+    public static List<String> getAllRequestsForOwner(String username) {
+        List<Property> propertyList = PropertyService.getAll();
+        List<String> propertyNameList = new ArrayList<String>();
+        List<String> returnList = new ArrayList<String>();
+        for (Property property : propertyList)
+            if (Objects.equals(property.getUsername(), username))
+                propertyNameList.add(property.getName());
+        for (BookingRequest bookingRequest: BookingRequestRepository.find()) {
+            int ok = 0;
+            for (String x : propertyNameList)
+                if (Objects.equals(bookingRequest.getPropertyName(), x))
+                    ok = 1;
+            if (ok == 1)
+                returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
+                        bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
+                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear());
+        }
+        return returnList;
+    }
 
 
 }

@@ -33,4 +33,21 @@ public class OpenOwnerController {
             e.printStackTrace();
         }
     }
+    public void handleClickRequestsAction() {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/openRequests.fxml"));
+            root = loader.load();
+            OpenRequestsController openRequestsController = loader.getController();
+            openRequestsController.setUsername(username);
+            //root = FXMLLoader.load(getClass().getClassLoader().getResource("openProperties.fxml"));
+            Stage stage=new Stage();
+            stage.setTitle("SimpleBNB Owner Page");
+            stage.setScene(new Scene(root,600,575));
+            stage.show();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

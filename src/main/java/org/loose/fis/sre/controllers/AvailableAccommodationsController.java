@@ -68,6 +68,7 @@ public class AvailableAccommodationsController {
         if(ok==1) {
             Property p = PropertyService.getPropertyByName(propertynameField.getText());
             BookingRequest newbook = new BookingRequest(BookingRequestService.getLastId() + 1, clientUsername, propertynameField.getText(), checkinday, checkinmonth, checkinyear, checkoutday, checkoutmonth, checkoutyear);
+            BookingRequestService.addBookingRequest(newbook);
             message.setText(String.format("Booking request sent from %s", clientUsername));
         }
         else{
