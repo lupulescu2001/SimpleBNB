@@ -17,6 +17,16 @@
         <Button onAction="#handleClickSearchAccommodationAction" text="Search for an accommodation"/>
     </HBox>
 
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Button onAction="#handleseeupcomingreservations" text="See upcoming reservations"/>
+    </HBox>
+
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <Button onAction="#handleseepastreservations" text="See past reservations"/>
+    </HBox>
+
+    <Text fx:id="errormessage" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
 
 
 </GridPane>
