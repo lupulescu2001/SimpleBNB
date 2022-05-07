@@ -16,6 +16,9 @@
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <Button onAction="#handleClickPropertiesAction" text="Properties"/>
     </HBox>
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Button onAction="#handleClickRequestsAction" text="Requests"/>
+    </HBox>
 
 </GridPane>
 
