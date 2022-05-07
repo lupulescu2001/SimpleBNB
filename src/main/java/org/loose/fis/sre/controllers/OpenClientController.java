@@ -10,12 +10,24 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class OpenClientController {
+
+    private String clientUsername;
+
+    public void setClientUsername(String s){
+        clientUsername=s;
+    }
+
     @FXML
     public void handleClickSearchAccommodationAction(){
 
-        Parent root;
+
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("searchAccommodation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/searchAccommodation.fxml"));
+            Parent root;
+            root = (Parent) loader.load();
+            SearchAccommodationController searchAccommodationController=loader.getController();
+            searchAccommodationController.setClientUsername(clientUsername);
+
             Stage stage=new Stage();
             stage.setTitle("SimpleBNB");
             stage.setScene(new Scene(root,600,575));

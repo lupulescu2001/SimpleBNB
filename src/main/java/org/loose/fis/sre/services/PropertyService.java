@@ -54,6 +54,14 @@ public class PropertyService {
         }
         return sol;
     }
+    public static Property getPropertyByName(String name){
+        Property sol=new Property();
+        for(Property property:propertyRepository.find())
+            if(Objects.equals(name,property.getName()))
+                sol=property;
+        return sol;
+
+    }
 
     public static void changeDescription(String name, String username, String description) throws PropertyDoesNotExistException {
         int ok = 0;

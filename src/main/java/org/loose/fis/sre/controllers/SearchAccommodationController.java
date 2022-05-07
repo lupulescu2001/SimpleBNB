@@ -57,6 +57,13 @@ public class SearchAccommodationController{
 
     @FXML
     private Text message;
+    private String clientUsername;
+
+    public void setClientUsername(String s)
+    {
+        clientUsername=s;
+    }
+
 
 
 
@@ -74,6 +81,10 @@ public class SearchAccommodationController{
             root = (Parent) loader.load();
             AvailableAccommodationsController availableAccommodationsController = loader.getController();
             availableAccommodationsController.setAvailableList(PropertyService.getAllPropertiesByName(possible_prop));
+            availableAccommodationsController.setClientUsername(clientUsername);
+            availableAccommodationsController.setAvailableNames(possible_prop);
+            availableAccommodationsController.setCheckin(checkindayField.getText(),checkinmonthField.getText(),checkinyearField.getText());
+            availableAccommodationsController.setCheckout(checkoutdayField.getText(),checkoutmonthField.getText(),checkoutyearField.getText());
             Stage stage=new Stage();
             stage.setTitle("SimpleBNB");
             stage.setScene(new Scene(root,600,575));
