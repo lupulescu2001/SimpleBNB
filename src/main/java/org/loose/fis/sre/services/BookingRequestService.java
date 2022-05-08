@@ -128,10 +128,20 @@ public class BookingRequestService {
             for (String x : propertyNameList)
                 if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0)
                     ok = 1;
-            if (ok == 1)
+            int rev = 0, mrk = 0;
+            for (User user : UserService.getAllUsers())
+                if (Objects.equals(user.getUsername(), bookingRequest.getClientusername())) {
+                    mrk = user.getMark();
+                    rev = user.getReviews();
+                }
+            if (ok == 1 && rev > 0)
                 returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
                         bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
-                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear());
+                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + " and the reviews are " + 1.0 * mrk/rev);
+            if (ok == 1 && rev == 0)
+                returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
+                        bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
+                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + " and he has no reviews");
         }
         return returnList;
     }
