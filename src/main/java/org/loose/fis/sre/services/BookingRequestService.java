@@ -27,8 +27,8 @@ public class BookingRequestService {
     private static ObjectRepository<BookingRequest> BookingRequestRepository;
     public static void initDatabase(){
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("SimpleBNBbookingrequest.db").toFile())
-                .openOrCreate("SimpleBNBbookingrequest", "SimpleBNBbookingrequest");
+                .filePath(getPathToFile("SimpleBNBbookingrequest1.db").toFile())
+                .openOrCreate("SimpleBNBbookingrequest1", "SimpleBNBbookingrequest1");
         BookingRequestRepository= database.getRepository(BookingRequest.class);
     }
     public static void addBookingRequest(BookingRequest b){

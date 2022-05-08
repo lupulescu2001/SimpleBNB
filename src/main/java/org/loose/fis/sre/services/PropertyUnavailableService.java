@@ -22,8 +22,8 @@ public class PropertyUnavailableService {
     private static ObjectRepository<PropertyUnavailable> propertyUnavailableRepository;
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("SimpleBNBunavailable4.db").toFile())
-                .openOrCreate("SimpleBNBunavailable4", "SimpleBNBunavailable4");
+                .filePath(getPathToFile("SimpleBNBunavailable5.db").toFile())
+                .openOrCreate("SimpleBNBunavailable5", "SimpleBNBunavailable5");
 
         propertyUnavailableRepository = database.getRepository(PropertyUnavailable.class);
     }
