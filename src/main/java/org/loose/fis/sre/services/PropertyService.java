@@ -23,8 +23,8 @@ public class PropertyService {
 
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("SimpleBNBproperty.db").toFile())
-                .openOrCreate("SimpleBNBproperty", "SimpleBNBproperty");
+                .filePath(getPathToFile("SimpleBNBproperty1.db").toFile())
+                .openOrCreate("SimpleBNBproperty1", "SimpleBNBproperty1");
 
         propertyRepository = database.getRepository(Property.class);
     }
