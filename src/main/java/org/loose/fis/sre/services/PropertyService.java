@@ -49,10 +49,18 @@ public class PropertyService {
     }
     public static List<String> getAllPropertiesByName(List<String> list){
         List<String> sol = new ArrayList<String>();
+        float rev;
+        String review;
         for(String x : list)
         for (Property property : propertyRepository.find()) {
-            if (Objects.equals(x, property.getName()))
-                sol.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription() + '/' +  property.getReview());
+            if (Objects.equals(x, property.getName())) {
+                rev = property.getReview();
+                if(rev==0)
+                    review="No reviews yet";
+                else
+                    review=Float.toString(rev);
+                sol.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription() + '/' + review);
+            }
         }
         return sol;
     }
