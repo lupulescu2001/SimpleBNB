@@ -266,4 +266,25 @@ public class BookingRequestService {
                     }
         }
     }
+    public static List<String> getPastClients(String username) {
+        List<Property> propertyList = PropertyService.getAll();
+        List<String> propertyNameList = new ArrayList<String>();
+        for (Property property : propertyList)
+            if (Objects.equals(property.getUsername(), username))
+                propertyNameList.add(property.getName());
+        LocalDateTime now= LocalDateTime.now();
+        List<String> sol = new ArrayList<>();
+        for (BookingRequest bookingRequest : BookingRequestRepository.find())
+            if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+                    (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
+                    || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth()))
+                for (Property property : PropertyService.getAll())
+                    if (Objects.equals(bookingRequest.getPropertyName(), property.getName()))
+                        sol.add("The Client " + bookingRequest.getClientusername() + " stayed at : " + bookingRequest.getPropertyName() + " from " + bookingRequest.getCheckinDay() +
+                                "/"+bookingRequest.getCheckinMonth()+"/"+bookingRequest.getCheckinYear()+ " to " +
+                                bookingRequest.getCheckoutDay() +
+                                "/"+bookingRequest.getCheckoutMonth()+"/"+bookingRequest.getCheckoutYear());
+        return sol;
+    }
 }
