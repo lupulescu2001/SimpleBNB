@@ -24,6 +24,8 @@ public class Property {
     public Property() {
     }
     public float getReview(){
+        if(this.nr_of_reviews==0)
+            return 0;
         return (float)this.sum_of_reviews/this.nr_of_reviews;
     }
     public void setSum_of_reviews(int newSum){

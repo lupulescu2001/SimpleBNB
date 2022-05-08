@@ -1,6 +1,0 @@
-org\loose\fis\sre\exceptions\ClientDoesNotHavePastReservationsException.class
-org\loose\fis\sre\exceptions\IncorrectScoreException.class
-org\loose\fis\sre\controllers\OpenPastClientsController.class
-org\loose\fis\sre\exceptions\MarkIsIncorrectException.class
-org\loose\fis\sre\controllers\UpcomingReservationsController.class
-org\loose\fis\sre\controllers\PastReservationsController.class
