@@ -25,6 +25,8 @@ public class OpenRequestsController {
     private String username;
     private List <String> clientUsernames;
     @FXML
+    private TextField propertyName;
+    @FXML
     private ListView<String> listView;
     @FXML
     private TextField clientUsername;
@@ -53,14 +55,14 @@ public class OpenRequestsController {
     }
     public void handleClickAcceptAction() {
         try {
-            BookingRequestService.searchClientUsername(username, clientUsername.getText(), checkindayField.getText(),
+            BookingRequestService.searchClientUsername(username, propertyName.getText(), clientUsername.getText(), checkindayField.getText(),
                     checkinmonthField.getText(), checkinyearField.getText(), checkoutdayField.getText(),
                     checkoutmonthField.getText(), checkoutyearField.getText());
-            PropertyUnavailable x = BookingRequestService.theProperty(username, clientUsername.getText(), checkindayField.getText(),
+            PropertyUnavailable x = BookingRequestService.theProperty(username, propertyName.getText(), clientUsername.getText(), checkindayField.getText(),
                     checkinmonthField.getText(), checkinyearField.getText(), checkoutdayField.getText(),
                     checkoutmonthField.getText(), checkoutyearField.getText());
             PropertyUnavailableService.bookingToUnavailable(x);
-            BookingRequestService.setBookingStatus(1,username, clientUsername.getText(), checkindayField.getText(),
+            BookingRequestService.setBookingStatus(1,username, propertyName.getText(), clientUsername.getText(), checkindayField.getText(),
                     checkinmonthField.getText(), checkinyearField.getText(), checkoutdayField.getText(),
                     checkoutmonthField.getText(), checkoutyearField.getText());
             addMessage.setText("Property booking accepted succesfully!");
@@ -74,10 +76,10 @@ public class OpenRequestsController {
     }
     public void handleClickDenyAction() {
         try {
-            BookingRequestService.searchClientUsername(username, clientUsername.getText(), checkindayField.getText(),
+            BookingRequestService.searchClientUsername(username, propertyName.getText(), clientUsername.getText(), checkindayField.getText(),
                     checkinmonthField.getText(), checkinyearField.getText(), checkoutdayField.getText(),
                     checkoutmonthField.getText(), checkoutyearField.getText());
-            BookingRequestService.setBookingStatus(2, username, clientUsername.getText(), checkindayField.getText(),
+            BookingRequestService.setBookingStatus(2, username, propertyName.getText(), clientUsername.getText(), checkindayField.getText(),
                     checkinmonthField.getText(), checkinyearField.getText(), checkoutdayField.getText(),
                     checkoutmonthField.getText(), checkoutyearField.getText());
             addMessage.setText("Request denied successfully");

@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class Property {
     @Id
+    private String name;
     private String cityName;
     private String description;
     private String username;
-    private String name;
     private int sum_of_reviews;
     private int nr_of_reviews;
 

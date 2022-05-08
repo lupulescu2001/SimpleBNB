@@ -37,7 +37,7 @@ public class BookingRequestService {
     public static int getLastId(){
         int id=0;
         for(BookingRequest bookingRequest : BookingRequestRepository.find())
-            id= bookingRequest.getId();
+            id= (id > bookingRequest.getId()) ? id : bookingRequest.getId();
         return id;
     }
 
@@ -128,14 +128,24 @@ public class BookingRequestService {
             for (String x : propertyNameList)
                 if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0)
                     ok = 1;
-            if (ok == 1)
+            int rev = 0, mrk = 0;
+            for (User user : UserService.getAllUsers())
+                if (Objects.equals(user.getUsername(), bookingRequest.getClientusername())) {
+                    mrk = user.getMark();
+                    rev = user.getReviews();
+                }
+            if (ok == 1 && rev > 0)
                 returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
                         bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
-                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear());
+                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + " and the reviews are " + 1.0 * mrk/rev);
+            if (ok == 1 && rev == 0)
+                returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
+                        bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
+                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + " and he has no reviews");
         }
         return returnList;
     }
-    public static void searchClientUsername(String username, String clientUsername, String fDay, String fMonth, String fYear,
+    public static void searchClientUsername(String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
                                             String lDay, String lMonth, String lYear) throws ThisClientDidNotTryToRentYourPropertyException, IncorrectDateException {
         List<Property> propertyList = PropertyService.getAll();
         List<String> propertyNameList = new ArrayList<String>();
@@ -166,7 +176,7 @@ public class BookingRequestService {
             for (String x : propertyNameList) {
                 if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0
                         && checkinday == iday && checkinmonth == imonth && checkinyear == iyear && checkoutday == oday
-                        && checkoutmonth == omonth && checkoutyear == oyear)
+                        && checkoutmonth == omonth && checkoutyear == oyear && Objects.equals(propertyName, bookingRequest.getPropertyName()))
                     checkList.add(bookingRequest.getClientusername());
             }
         }
@@ -179,7 +189,7 @@ public class BookingRequestService {
         if (ok == 0)
             throw new ThisClientDidNotTryToRentYourPropertyException(clientUsername);
     }
-    public static PropertyUnavailable theProperty(String username, String clientUsername, String fDay, String fMonth, String fYear,
+    public static PropertyUnavailable theProperty(String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
                                                 String lDay, String lMonth, String lYear) {
         List<Property> propertyList = PropertyService.getAll();
         List<String> propertyNameList = new ArrayList<String>();
@@ -205,7 +215,7 @@ public class BookingRequestService {
             for (String x : propertyNameList) {
                 if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0
                         && checkinday == iday && checkinmonth == imonth && checkinyear == iyear && checkoutday == oday
-                        && checkoutmonth == omonth && checkoutyear == oyear)
+                        && checkoutmonth == omonth && checkoutyear == oyear && Objects.equals(propertyName, bookingRequest.getPropertyName()))
                     ok = 1;
                 if (ok == 1) {
                     checkList.add(bookingRequest.getClientusername());
@@ -222,7 +232,7 @@ public class BookingRequestService {
             return new PropertyUnavailable(PropertyUnavailableService.getTheId(), username, check, fDay, fMonth, fYear, lDay, lMonth, lYear);
         return null;
     }
-    public static void setBookingStatus(int status,String username, String clientUsername, String fDay, String fMonth, String fYear,
+    public static void setBookingStatus(int status,String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
                                         String lDay, String lMonth, String lYear) {
         List<Property> propertyList = PropertyService.getAll();
         List<String> propertyNameList = new ArrayList<String>();
@@ -246,7 +256,7 @@ public class BookingRequestService {
             int checkoutyear = Integer.parseInt(bookingRequest.getCheckoutYear());
             if (bookingRequest.getRequestStatus() == 0 && checkinday == iday && checkinmonth == imonth && checkinyear == iyear
                     && checkoutday == oday && checkoutmonth == omonth && checkoutyear == oyear
-                    && Objects.equals(bookingRequest.getClientusername(), clientUsername))
+                    && Objects.equals(bookingRequest.getClientusername(), clientUsername) && Objects.equals(propertyName, bookingRequest.getPropertyName()))
                 for (String x : propertyNameList)
                     if (Objects.equals(x, bookingRequest.getPropertyName())) {
                         ok = 1;

@@ -4,12 +4,13 @@ import org.dizitart.no2.objects.Id;
 
 public class User {
     @Id
+    private String username;
     private String fullName;
     private String phoneNumber;
-
-    private String username;
     private String password;
     private String role;
+    private int reviews;
+    private int mark;
 
     public User(String fullName,String phoneNumber,String username, String password, String role) {
         this.username = username;
@@ -17,9 +18,27 @@ public class User {
         this.role = role;
         this.fullName=fullName;
         this.phoneNumber=phoneNumber;
+        this.reviews = 0;
+        this.mark = 0;
     }
 
     public User() {
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
     }
 
     public String getUsername() {

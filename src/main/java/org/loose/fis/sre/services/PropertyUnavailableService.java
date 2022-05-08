@@ -110,7 +110,7 @@ public class PropertyUnavailableService {
     public static int getTheId() {
         int id = 0;
         for (PropertyUnavailable propertyUnavailable : propertyUnavailableRepository.find())
-                id = propertyUnavailable.getId() + 1;
+                id = (id > propertyUnavailable.getId() + 1) ? id : (propertyUnavailable.getId() + 1);
         return id;
     }
 }
