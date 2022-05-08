@@ -248,10 +248,10 @@ public class BookingRequestService {
         LocalDateTime now= LocalDateTime.now();
         List<String> sol = new ArrayList<>();
         for (BookingRequest bookingRequest : BookingRequestRepository.find())
-            if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+            if((Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
                     (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
                     || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
-                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) {
+                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) && bookingRequest.getRequestStatus() == 1) {
                 for (String property : propertyNameList)
                     if (Objects.equals(bookingRequest.getPropertyName(), property))
                         sol.add("The Client " + bookingRequest.getClientusername() + " stayed at : " + bookingRequest.getPropertyName() + " from " + bookingRequest.getCheckinDay() +
@@ -270,10 +270,10 @@ public class BookingRequestService {
         LocalDateTime now= LocalDateTime.now();
         List<String> sol = new ArrayList<>();
         for (BookingRequest bookingRequest : BookingRequestRepository.find())
-            if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+            if((Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
                     (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
                     || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
-                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) {
+                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) && bookingRequest.getRequestStatus() == 1) {
                 for (String property : propertyNameList)
                     if (Objects.equals(bookingRequest.getPropertyName(), property))
                         sol.add(bookingRequest.getClientusername());
