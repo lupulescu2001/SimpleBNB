@@ -14,10 +14,10 @@ public class Property {
     private int nr_of_reviews;
 
     public Property(String cityName, String description, String username, String name) {
+        this.name = name;
         this.cityName = cityName;
         this.description = description;
         this.username = username;
-        this.name = name;
         this.sum_of_reviews=0;
         this.nr_of_reviews=0;
     }
