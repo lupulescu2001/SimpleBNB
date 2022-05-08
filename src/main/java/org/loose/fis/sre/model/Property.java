@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class Property {
     @Id
+    private String name;
     private String cityName;
     private String description;
     private String username;
-    private String name;
 
     public Property(String cityName, String description, String username, String name) {
         this.cityName = cityName;
