@@ -52,7 +52,7 @@ public class PropertyService {
         for(String x : list)
         for (Property property : propertyRepository.find()) {
             if (Objects.equals(x, property.getName()))
-                sol.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription());
+                sol.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription() + '/' +  property.getReview());
         }
         return sol;
     }
