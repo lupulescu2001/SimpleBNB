@@ -15,6 +15,7 @@
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/controllers/ChangeDescriptionController.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/exceptions/ThisClientDidNotTryToRentYourPropertyException.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/services/FileSystemService.java
+/Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/exceptions/IncorrectScoreException.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/exceptions/NoPropertyInThisCity.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/controllers/OpenRequestsController.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/controllers/UpcomingReservationsController.java
@@ -25,6 +26,7 @@
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/services/BookingRequestService.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/model/BookingRequest.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/services/UserService.java
+/Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/controllers/PastReservationsController.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/exceptions/NoPropertyAvailable.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/controllers/OpenPropertiesController.java
 /Users/alexkosa/Desktop/SimpleBNB/SimpleBNB/src/main/java/org/loose/fis/sre/exceptions/PropertyAlreadyExistsException.java

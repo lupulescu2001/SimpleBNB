@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.loose.fis.sre.services.BookingRequestService;
 import org.loose.fis.sre.controllers.UpcomingReservationsController;
+import org.loose.fis.sre.controllers.PastReservationsController;
 
 import java.io.IOException;
 
@@ -75,20 +76,21 @@ public class OpenClientController {
         }
 
     }
+    @FXML
     public void handleseepastreservations(){
-
+        Parent root;
         try{
             List<String> up = new ArrayList<>();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pastReservations.fxml"));
-            Parent root;
-            root = (Parent) loader.load();
+
+           // errormessage.setText(String.format("crapa"));
+            root = (Parent)loader.load();
+            //  errormessage.setText(String.format("crapa"));
             up=BookingRequestService.getAllPastRequestsForUser(clientUsername);
-            //errormessage.setText(String.format(clientUsername));
-            PastReservationsController upcomingReservationsController =loader.getController();
-            upcomingReservationsController.setPastReservations(up);
-
-
-
+           //errormessage.setText(String.format(clientUsername));
+            PastReservationsController pastReservationsController =loader.getController();
+            pastReservationsController.setPastReservations(up);
+            pastReservationsController.setclientusername(clientUsername);
 
 
             Stage stage=new Stage();

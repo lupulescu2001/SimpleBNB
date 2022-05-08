@@ -4,6 +4,8 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.Id;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.jetbrains.annotations.NotNull;
+import org.loose.fis.sre.exceptions.IncorrectScoreException;
+import org.loose.fis.sre.services.BookingRequestService;
 import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
 import org.loose.fis.sre.model.Property;
 import org.loose.fis.sre.model.User;
@@ -61,6 +63,32 @@ public class PropertyService {
                 sol=property;
         return sol;
 
+    }
+    public static void addReview(String prop_name,int rev,String client_username) throws IncorrectScoreException,PropertyDoesNotExistException {
+
+        if(rev<1 || rev>10)
+            throw new IncorrectScoreException();
+        int ok=0;
+        for (String s : BookingRequestService.getAllPastRequestsNameForUser(client_username)){
+            if(Objects.equals(s,prop_name))
+                ok=1;
+        }
+        if(ok==0)
+            throw new PropertyDoesNotExistException(prop_name);
+
+        for(Property property:propertyRepository.find())
+            if(Objects.equals(prop_name,property.getName()))
+            {
+                int nr=property.getNr_of_reviews();
+                int sum=property.getSum_of_reviews();
+
+                nr+=1;
+                sum+=rev;
+                property.setNr_of_reviews(nr);
+                property.setSum_of_reviews(sum);
+                propertyRepository.update(property);
+              //  System.out.println(property.getNr_of_reviews());
+            }
     }
 
     public static void changeDescription(String name, String username, String description) throws PropertyDoesNotExistException {

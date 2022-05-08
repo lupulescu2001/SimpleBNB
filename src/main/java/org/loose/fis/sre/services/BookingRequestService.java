@@ -93,6 +93,29 @@ public class BookingRequestService {
         return sol;
     }
 
+    public static List<String> getAllPastRequestsNameForUser(String username){
+        List<String> sol = new ArrayList<>();
+
+        LocalDateTime now= LocalDateTime.now();
+
+
+
+        for (BookingRequest bookingRequest : BookingRequestRepository.find()){
+            if (bookingRequest.getRequestStatus()==1 && Objects.equals(username,bookingRequest.getClientusername()))
+                if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
+                        || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                        && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth()))
+
+                {
+                    sol.add(bookingRequest.getPropertyName());
+                }
+        }
+
+
+        return sol;
+    }
+
     public static List<String> getAllRequestsForOwner(String username) {
         List<Property> propertyList = PropertyService.getAll();
         List<String> propertyNameList = new ArrayList<String>();

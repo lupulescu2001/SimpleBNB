@@ -1,2 +1,3 @@
+org/loose/fis/sre/exceptions/IncorrectScoreException.class
 org/loose/fis/sre/controllers/UpcomingReservationsController.class
 org/loose/fis/sre/controllers/PastReservationsController.class
