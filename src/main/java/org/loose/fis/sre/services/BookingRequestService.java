@@ -129,15 +129,17 @@ public class BookingRequestService {
                 if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0)
                     ok = 1;
             int rev = 0, mrk = 0;
+            String smth = "abc";
             for (User user : UserService.getAllUsers())
                 if (Objects.equals(user.getUsername(), bookingRequest.getClientusername())) {
                     mrk = user.getMark();
                     rev = user.getReviews();
+                    smth = user.getUsername();
                 }
             if (ok == 1 && rev > 0)
                 returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
                         bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
-                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + " and the reviews are " + 1.0 * mrk/rev);
+                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + " and the reviews are " + 1.0 * mrk / rev);
             if (ok == 1 && rev == 0)
                 returnList.add(bookingRequest.getClientusername() + " wants to rent the property " + bookingRequest.getPropertyName() + " during " +
                         bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + " and " +
@@ -265,5 +267,46 @@ public class BookingRequestService {
                         break;
                     }
         }
+    }
+    public static List<String> getPastClients(String username) {
+        List<Property> propertyList = PropertyService.getAll();
+        List<String> propertyNameList = new ArrayList<String>();
+        for (Property property : propertyList)
+            if (Objects.equals(property.getUsername(), username))
+                propertyNameList.add(property.getName());
+        LocalDateTime now= LocalDateTime.now();
+        List<String> sol = new ArrayList<>();
+        for (BookingRequest bookingRequest : BookingRequestRepository.find())
+            if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+                    (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
+                    || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) {
+                for (String property : propertyNameList)
+                    if (Objects.equals(bookingRequest.getPropertyName(), property))
+                        sol.add("The Client " + bookingRequest.getClientusername() + " stayed at : " + bookingRequest.getPropertyName() + " from " + bookingRequest.getCheckinDay() +
+                                "/" + bookingRequest.getCheckinMonth() + "/" + bookingRequest.getCheckinYear() + " to " +
+                                bookingRequest.getCheckoutDay() +
+                                "/" + bookingRequest.getCheckoutMonth() + "/" + bookingRequest.getCheckoutYear());
+            }
+        return sol;
+    }
+    public static List<String> getAllPastClients(String username) {
+        List<Property> propertyList = PropertyService.getAll();
+        List<String> propertyNameList = new ArrayList<String>();
+        for (Property property : propertyList)
+            if (Objects.equals(property.getUsername(), username))
+                propertyNameList.add(property.getName());
+        LocalDateTime now= LocalDateTime.now();
+        List<String> sol = new ArrayList<>();
+        for (BookingRequest bookingRequest : BookingRequestRepository.find())
+            if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+                    (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
+                    || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) {
+                for (String property : propertyNameList)
+                    if (Objects.equals(bookingRequest.getPropertyName(), property))
+                        sol.add(bookingRequest.getClientusername());
+            }
+        return sol;
     }
 }

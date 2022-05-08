@@ -19,6 +19,7 @@ C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\model
 C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\UpcomingReservationsController.java
 C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\exceptions\IncorrectCredentials.java
 C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\DeletePropertyController.java
+C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\OpenPastClientsController.java
 C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\LoginController.java
 C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\OpenOwnerController.java
 C:\Users\VladL\Desktop\SimpleBNB\SimpleBNB\src\main\java\org\loose\fis\sre\Main.java

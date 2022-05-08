@@ -19,6 +19,9 @@
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button onAction="#handleClickRequestsAction" text="Requests"/>
     </HBox>
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Button onAction="#handleClickPastClients" text="Past Clients"/>
+    </HBox>
 
 </GridPane>
 
