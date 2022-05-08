@@ -1,9 +1,3 @@
-org\loose\fis\sre\model\BookingRequest.class
-org\loose\fis\sre\services\BookingRequestService.class
-org\loose\fis\sre\controllers\AvailableAccommodationsController.class
-org\loose\fis\sre\exceptions\NoPropertyAvailable.class
-org\loose\fis\sre\controllers\OpenRequestsController.class
-org\loose\fis\sre\exceptions\NoPropertyInThisCity.class
-org\loose\fis\sre\exceptions\ThisClientDidNotTryToRentYourPropertyException.class
-org\loose\fis\sre\controllers\SearchAccommodationController.class
-org\loose\fis\sre\controllers\OpenClientController.class
+org/loose/fis/sre/exceptions/IncorrectScoreException.class
+org/loose/fis/sre/controllers/UpcomingReservationsController.class
+org/loose/fis/sre/controllers/PastReservationsController.class

@@ -1,5 +1,8 @@
 package org.loose.fis.sre.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.Id;
 import org.dizitart.no2.objects.ObjectRepository;
@@ -37,6 +40,82 @@ public class BookingRequestService {
             id= bookingRequest.getId();
         return id;
     }
+
+    public static List<String> getAllUpcomingRequestsForUser(String username){
+        List<String> sol = new ArrayList<>();
+
+        LocalDateTime now= LocalDateTime.now();
+
+
+
+        for (BookingRequest bookingRequest : BookingRequestRepository.find()){
+            if (bookingRequest.getRequestStatus()==1 && Objects.equals(username,bookingRequest.getClientusername()))
+                if(Integer.parseInt(bookingRequest.getCheckinYear())>now.getYear() ||
+                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())>now.getMonthValue())
+                || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                && Integer.parseInt(bookingRequest.getCheckinDay())>=now.getDayOfMonth()))
+
+                {
+                sol.add("Reservation at : " + bookingRequest.getPropertyName() + " from " + bookingRequest.getCheckinDay() +
+                        "/"+bookingRequest.getCheckinMonth()+"/"+bookingRequest.getCheckinYear()+ " to " +
+                        bookingRequest.getCheckoutDay() +
+                        "/"+bookingRequest.getCheckoutMonth()+"/"+bookingRequest.getCheckoutYear() + " was approved ");
+                }
+        }
+
+
+        return sol;
+    }
+
+    public static List<String> getAllPastRequestsForUser(String username){
+        List<String> sol = new ArrayList<>();
+
+        LocalDateTime now= LocalDateTime.now();
+
+
+
+        for (BookingRequest bookingRequest : BookingRequestRepository.find()){
+            if (bookingRequest.getRequestStatus()==1 && Objects.equals(username,bookingRequest.getClientusername()))
+                if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
+                        || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                        && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth()))
+
+                {
+                    sol.add("Reservation at : " + bookingRequest.getPropertyName() + " from " + bookingRequest.getCheckinDay() +
+                            "/"+bookingRequest.getCheckinMonth()+"/"+bookingRequest.getCheckinYear()+ " to " +
+                            bookingRequest.getCheckoutDay() +
+                            "/"+bookingRequest.getCheckoutMonth()+"/"+bookingRequest.getCheckoutYear() + " was approved ");
+                }
+        }
+
+
+        return sol;
+    }
+
+    public static List<String> getAllPastRequestsNameForUser(String username){
+        List<String> sol = new ArrayList<>();
+
+        LocalDateTime now= LocalDateTime.now();
+
+
+
+        for (BookingRequest bookingRequest : BookingRequestRepository.find()){
+            if (bookingRequest.getRequestStatus()==1 && Objects.equals(username,bookingRequest.getClientusername()))
+                if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
+                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
+                        || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
+                        && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth()))
+
+                {
+                    sol.add(bookingRequest.getPropertyName());
+                }
+        }
+
+
+        return sol;
+    }
+
     public static List<String> getAllRequestsForOwner(String username) {
         List<Property> propertyList = PropertyService.getAll();
         List<String> propertyNameList = new ArrayList<String>();
