@@ -203,36 +203,7 @@ public class BookingRequestService {
         int oday = Integer.parseInt(lDay);
         int omonth = Integer.parseInt(lMonth);
         int oyear = Integer.parseInt(lYear);
-        for (Property property : propertyList)
-            if (Objects.equals(property.getUsername(), username))
-                propertyNameList.add(property.getName());
-        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {
-            int ok = 0;
-            int checkinday = Integer.parseInt(bookingRequest.getCheckinDay());
-            int checkinmonth = Integer.parseInt(bookingRequest.getCheckinMonth());
-            int checkinyear = Integer.parseInt(bookingRequest.getCheckinYear());
-            int checkoutday = Integer.parseInt(bookingRequest.getCheckoutDay());
-            int checkoutmonth = Integer.parseInt(bookingRequest.getCheckoutMonth());
-            int checkoutyear = Integer.parseInt(bookingRequest.getCheckoutYear());
-            for (String x : propertyNameList) {
-                if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0
-                        && checkinday == iday && checkinmonth == imonth && checkinyear == iyear && checkoutday == oday
-                        && checkoutmonth == omonth && checkoutyear == oyear && Objects.equals(propertyName, bookingRequest.getPropertyName()))
-                    ok = 1;
-                if (ok == 1) {
-                    checkList.add(bookingRequest.getClientusername());
-                    nameList.add(x);
-                }
-            }
-        }
-        String check = null;
-        for (int i = 0; i < checkList.size(); i++) {
-            if (Objects.equals(checkList.get(i), clientUsername))
-                check = nameList.get(i);
-        }
-        if (check != null)
-            return new PropertyUnavailable(PropertyUnavailableService.getTheId(), username, check, fDay, fMonth, fYear, lDay, lMonth, lYear);
-        return null;
+        return new PropertyUnavailable(PropertyUnavailableService.getTheId(), username, propertyName, fDay, fMonth, fYear, lDay, lMonth, lYear);
     }
     public static void setBookingStatus(int status,String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
                                         String lDay, String lMonth, String lYear) {
