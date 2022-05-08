@@ -12,6 +12,14 @@
         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
     </padding>
     <ListView fx:id="listView" layoutY="30" prefWidth="600" prefHeight="100"/>
+    <Text id="text" text="The mark entered should be between 1 and 10" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <Label text="Client Username:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <TextField fx:id="clientUsername" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <Label text="Client mark:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+    <TextField fx:id="clientMark" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="8">
+        <Button onAction="#handleLeaveReviewAction" text="Leave review" />
+    </HBox>
 
 </GridPane>
 
