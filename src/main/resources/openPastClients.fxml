@@ -20,6 +20,7 @@
     <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="8">
         <Button onAction="#handleLeaveReviewAction" text="Leave review" />
     </HBox>
+    <Text fx:id="addMessage" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
 
 </GridPane>
 

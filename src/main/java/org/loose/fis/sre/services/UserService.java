@@ -3,6 +3,7 @@ package org.loose.fis.sre.services;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
+import org.loose.fis.sre.model.BookingRequest;
 import org.loose.fis.sre.model.User;
 import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import java.nio.charset.StandardCharsets;
@@ -10,6 +11,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.List;
+import org.loose.fis.sre.exceptions.MarkIsIncorrectException;
+import org.loose.fis.sre.exceptions.ClientDoesNotHavePastReservationsException;
+
 
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
 
@@ -78,6 +82,28 @@ public class UserService {
             }
         }
         throw new IncorrectCredentials(username);
+    }
+    public static void addReview(String username, String clientUsername, String mark) throws MarkIsIncorrectException, ClientDoesNotHavePastReservationsException {
+        int markInt;
+        try {
+            markInt = Integer.parseInt(mark);
+        } catch (NumberFormatException e) {
+            throw new MarkIsIncorrectException();
+        }
+        int ok = 0;
+        if (markInt < 1 || markInt > 10)
+            throw new MarkIsIncorrectException();
+        for (String bookingUsername : BookingRequestService.getAllPastClients(username))
+            if (Objects.equals(bookingUsername, clientUsername))
+                ok = 1;
+        if (ok == 0)
+            throw new ClientDoesNotHavePastReservationsException(clientUsername);
+        for (User user : userRepository.find())
+            if (Objects.equals(user.getUsername(), clientUsername)) {
+                user.setMark(user.getMark() + markInt);
+                user.setReviews(user.getReviews() + 1);
+                userRepository.update(user);
+            }
     }
 }
 
