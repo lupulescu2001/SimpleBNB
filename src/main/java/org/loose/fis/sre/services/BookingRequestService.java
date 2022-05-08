@@ -278,13 +278,14 @@ public class BookingRequestService {
             if(Integer.parseInt(bookingRequest.getCheckinYear())<now.getYear() ||
                     (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())<now.getMonthValue())
                     || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() && Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()
-                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth()))
-                for (Property property : PropertyService.getAll())
-                    if (Objects.equals(bookingRequest.getPropertyName(), property.getName()))
+                    && Integer.parseInt(bookingRequest.getCheckinDay())<=now.getDayOfMonth())) {
+                for (String property : propertyNameList)
+                    if (Objects.equals(bookingRequest.getPropertyName(), property))
                         sol.add("The Client " + bookingRequest.getClientusername() + " stayed at : " + bookingRequest.getPropertyName() + " from " + bookingRequest.getCheckinDay() +
-                                "/"+bookingRequest.getCheckinMonth()+"/"+bookingRequest.getCheckinYear()+ " to " +
+                                "/" + bookingRequest.getCheckinMonth() + "/" + bookingRequest.getCheckinYear() + " to " +
                                 bookingRequest.getCheckoutDay() +
-                                "/"+bookingRequest.getCheckoutMonth()+"/"+bookingRequest.getCheckoutYear());
+                                "/" + bookingRequest.getCheckoutMonth() + "/" + bookingRequest.getCheckoutYear());
+            }
         return sol;
     }
 }
