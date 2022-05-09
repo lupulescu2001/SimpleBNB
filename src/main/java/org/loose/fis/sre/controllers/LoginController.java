@@ -13,6 +13,8 @@ import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.services.UserService;
 import java.io.IOException;
+import java.util.Objects;
+
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
 
@@ -24,24 +26,29 @@ public class LoginController {
     private PasswordField passwordField;
     @FXML
     private TextField usernameField;
-    @FXML
-    private ChoiceBox role;
+
+    private String role=new String();
 
 
-    @FXML
-    public void initialize() {
-        role.getItems().addAll("Client", "Owner");
-    }
+  //  @FXML
+   // public void initialize() {
+     //   role.getItems().addAll("Client", "Owner");
+   // }
 
     @FXML
     public void handleLoginAction() {
         try {
-            UserService.CheckUserCredentials(usernameField.getText(), passwordField.getText(), (String) role.getValue());
+            role=UserService.getRoleByUsername(usernameField.getText());
+            UserService.CheckUserCredentials(usernameField.getText(), passwordField.getText(), (String) role);
             loginMessage.setText("Login successfully!");
             Parent root;
-            String roleValue = (String) role.getValue();
+
+           // String roleValue =  role;
+            String Owner = new String();
+            Owner="Owner";
+
             try {
-                if (roleValue == "Owner") {
+                if (Objects.equals(role,Owner)) {
                     //root = FXMLLoader.load(getClass().getClassLoader().getResource("openOwner.fxml"));
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/openOwner.fxml"));
                     String username = usernameField.getText();

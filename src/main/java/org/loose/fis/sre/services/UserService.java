@@ -28,6 +28,19 @@ public class UserService {
 
         userRepository = database.getRepository(User.class);
     }
+    public static String getRoleByUsername(String username) throws IncorrectCredentials{
+        String role= new String();
+        int ok=0;
+        for(User user:userRepository.find()){
+            if(Objects.equals(user.getUsername(),username))
+                role=user.getRole();
+            ok=1;
+        }
+        if(ok==0)
+            throw new IncorrectCredentials(username);
+
+        return role;
+    }
 
     public static void addUser(String fullName,String phoneNumber,String username, String password, String role) throws UsernameAlreadyExistsException {
         checkUserDoesNotAlreadyExist(username);
