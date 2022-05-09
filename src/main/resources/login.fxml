@@ -23,10 +23,6 @@
 
     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-    <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-
-    <ChoiceBox fx:id="role" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-    </ChoiceBox>
 
     <Text fx:id="loginMessage" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="8">
