@@ -25,6 +25,7 @@ C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\exce
 C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\SearchAccommodationController.java
 C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\services\PropertyUnavailableService.java
 C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\services\UserService.java
+C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\exceptions\NoRequestSelectedException.java
 C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\exceptions\ThisClientDidNotTryToRentYourPropertyException.java
 C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\controllers\RegistrationController.java
 C:\Users\VladL\Desktop\SIMPLEBNB2\SimpleBNB\src\main\java\org\loose\fis\sre\services\FileSystemService.java

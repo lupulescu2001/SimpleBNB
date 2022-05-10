@@ -10,28 +10,12 @@
         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
     </padding>
     <Text id="title-text" text="SimpleBNB Owner" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
-    <ListView fx:id="listView" layoutY="30" prefWidth="600" prefHeight="100"/>
-    <Label text="Client Username:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-    <TextField fx:id="clientUsername" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-    <Label text="Property Name:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <TextField fx:id="propertyName" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-    <Label text="Check-in-day:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-    <TextField fx:id="checkindayField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-    <Label text="Check-in-month:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-    <TextField fx:id="checkinmonthField" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-    <Label text="Check-in-year:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
-    <TextField fx:id="checkinyearField" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-    <Label text="Check-out-day:" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
-    <TextField fx:id="checkoutdayField" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
-    <Label text="Check-out-month:" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
-    <TextField fx:id="checkoutmonthField" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
-    <Label text="Check-out-year:" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
-    <TextField fx:id="checkoutyearField" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
-    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="13">
+    <ListView fx:id="listView" layoutY="30" prefWidth="600" prefHeight="100" onMouseClicked="#listViewSelectedItem"/>
+    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="5">
         <Button onAction="#handleClickAcceptAction" text="Accept" />
     </HBox>
-    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="14">
+    <HBox alignment="bottom_right" spacing="0" GridPane.columnIndex="0" GridPane.rowIndex="6">
         <Button onAction="#handleClickDenyAction" text="Deny" />
     </HBox>
-    <Text fx:id="addMessage" GridPane.columnIndex="1" GridPane.rowIndex="15"/>
+    <Text fx:id="addMessage" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
 </GridPane>
