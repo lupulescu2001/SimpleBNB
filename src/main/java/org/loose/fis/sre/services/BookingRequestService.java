@@ -147,97 +147,38 @@ public class BookingRequestService {
         }
         return returnList;
     }
-    public static void searchClientUsername(String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
-                                            String lDay, String lMonth, String lYear) throws ThisClientDidNotTryToRentYourPropertyException, IncorrectDateException {
+    public static List<Integer> getAllRequestIdsForOwner(String username) {
         List<Property> propertyList = PropertyService.getAll();
         List<String> propertyNameList = new ArrayList<String>();
-        List<String> checkList = new ArrayList<String>();
-        PropertyUnavailable propertyUnavailable = new PropertyUnavailable(0, username, "", fDay, fMonth, fYear, lDay, lMonth, lYear);
-        if (propertyUnavailable.date() == false)
-            throw new IncorrectDateException(propertyUnavailable);
-        if (propertyUnavailable.validDate() == false)
-            throw new IncorrectDateException(propertyUnavailable);
-        if (propertyUnavailable.firstGreaterThanLast() == false)
-            throw new IncorrectDateException(propertyUnavailable);
-        int iday = Integer.parseInt(fDay);
-        int imonth = Integer.parseInt(fMonth);
-        int iyear = Integer.parseInt(fYear);
-        int oday = Integer.parseInt(lDay);
-        int omonth = Integer.parseInt(lMonth);
-        int oyear = Integer.parseInt(lYear);
+        List<Integer> returnList = new ArrayList<Integer>();
         for (Property property : propertyList)
             if (Objects.equals(property.getUsername(), username))
                 propertyNameList.add(property.getName());
-        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {
-            int checkinday = Integer.parseInt(bookingRequest.getCheckinDay());
-            int checkinmonth = Integer.parseInt(bookingRequest.getCheckinMonth());
-            int checkinyear = Integer.parseInt(bookingRequest.getCheckinYear());
-            int checkoutday = Integer.parseInt(bookingRequest.getCheckoutDay());
-            int checkoutmonth = Integer.parseInt(bookingRequest.getCheckoutMonth());
-            int checkoutyear = Integer.parseInt(bookingRequest.getCheckoutYear());
-            for (String x : propertyNameList) {
-                if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0
-                        && checkinday == iday && checkinmonth == imonth && checkinyear == iyear && checkoutday == oday
-                        && checkoutmonth == omonth && checkoutyear == oyear && Objects.equals(propertyName, bookingRequest.getPropertyName()))
-                    checkList.add(bookingRequest.getClientusername());
-            }
-        }
-        int ok = 0;
-        for (String x : checkList) {
-            if (Objects.equals(x, clientUsername))
-                ok = 1;
-
-        }
-        if (ok == 0)
-            throw new ThisClientDidNotTryToRentYourPropertyException(clientUsername);
-    }
-    public static PropertyUnavailable theProperty(String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
-                                                String lDay, String lMonth, String lYear) {
-        List<Property> propertyList = PropertyService.getAll();
-        List<String> propertyNameList = new ArrayList<String>();
-        List<String> checkList = new ArrayList<String>();
-        List<String> nameList = new ArrayList<String>();
-        int iday = Integer.parseInt(fDay);
-        int imonth = Integer.parseInt(fMonth);
-        int iyear = Integer.parseInt(fYear);
-        int oday = Integer.parseInt(lDay);
-        int omonth = Integer.parseInt(lMonth);
-        int oyear = Integer.parseInt(lYear);
-        return new PropertyUnavailable(PropertyUnavailableService.getTheId(), username, propertyName, fDay, fMonth, fYear, lDay, lMonth, lYear);
-    }
-    public static void setBookingStatus(int status,String username, String propertyName, String clientUsername, String fDay, String fMonth, String fYear,
-                                        String lDay, String lMonth, String lYear) {
-        List<Property> propertyList = PropertyService.getAll();
-        List<String> propertyNameList = new ArrayList<String>();
-        List<String> checkList = new ArrayList<String>();
-        int iday = Integer.parseInt(fDay);
-        int imonth = Integer.parseInt(fMonth);
-        int iyear = Integer.parseInt(fYear);
-        int oday = Integer.parseInt(lDay);
-        int omonth = Integer.parseInt(lMonth);
-        int oyear = Integer.parseInt(lYear);
-        for (Property property : propertyList)
-            if (Objects.equals(property.getUsername(), username))
-                propertyNameList.add(property.getName());
-        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {
+        for (BookingRequest bookingRequest: BookingRequestRepository.find()) {
             int ok = 0;
-            int checkinday = Integer.parseInt(bookingRequest.getCheckinDay());
-            int checkinmonth = Integer.parseInt(bookingRequest.getCheckinMonth());
-            int checkinyear = Integer.parseInt(bookingRequest.getCheckinYear());
-            int checkoutday = Integer.parseInt(bookingRequest.getCheckoutDay());
-            int checkoutmonth = Integer.parseInt(bookingRequest.getCheckoutMonth());
-            int checkoutyear = Integer.parseInt(bookingRequest.getCheckoutYear());
-            if (bookingRequest.getRequestStatus() == 0 && checkinday == iday && checkinmonth == imonth && checkinyear == iyear
-                    && checkoutday == oday && checkoutmonth == omonth && checkoutyear == oyear
-                    && Objects.equals(bookingRequest.getClientusername(), clientUsername) && Objects.equals(propertyName, bookingRequest.getPropertyName()))
-                for (String x : propertyNameList)
-                    if (Objects.equals(x, bookingRequest.getPropertyName())) {
-                        ok = 1;
-                        bookingRequest.setRequestStatus(status);
-                        BookingRequestRepository.update(bookingRequest);
-                        break;
-                    }
+            for (String x : propertyNameList)
+                if (Objects.equals(bookingRequest.getPropertyName(), x) && bookingRequest.getRequestStatus() == 0)
+                    ok = 1;
+            int rev = 0, mrk = 0;
+            String smth = "abc";
+            for (User user : UserService.getAllUsers())
+                if (Objects.equals(user.getUsername(), bookingRequest.getClientusername())) {
+                    mrk = user.getMark();
+                    rev = user.getReviews();
+                    smth = user.getUsername();
+                }
+            if (ok == 1)
+                returnList.add(bookingRequest.getId());
         }
+        return returnList;
+    }
+    public static int getIdForRequest(String username, String request) {
+        List<String> requestList = getAllRequestsForOwner(username);
+        List<Integer> idList = getAllRequestIdsForOwner(username);
+        for (int i = 0; i < idList.size(); i++)
+            if (Objects.equals(requestList.get(i), request))
+                return idList.get(i);
+        return -1;
     }
     public static List<String> getPastClients(String username) {
         List<Property> propertyList = PropertyService.getAll();
@@ -279,5 +220,23 @@ public class BookingRequestService {
                         sol.add(bookingRequest.getClientusername());
             }
         return sol;
+    }
+    public static void setBookingStatus(int id, int status) {
+        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {
+            if (Objects.equals(id, bookingRequest.getId())) {
+                bookingRequest.setRequestStatus(status);
+                BookingRequestRepository.update(bookingRequest);
+            }
+        }
+    }
+    public static PropertyUnavailable theProperty(int id, String username) {
+        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {
+            if (Objects.equals(id, bookingRequest.getId())) {
+                return new PropertyUnavailable(PropertyUnavailableService.getTheId(), username, bookingRequest.getPropertyName(),
+                bookingRequest.getCheckinDay(), bookingRequest.getCheckinMonth(), bookingRequest.getCheckinYear(),
+                bookingRequest.getCheckoutDay(), bookingRequest.getCheckoutMonth(), bookingRequest.getCheckoutYear());
+            }
+        }
+        return null;
     }
 }

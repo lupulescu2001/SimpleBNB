@@ -62,8 +62,7 @@ public class OpenOwnerController {
             stage.setTitle("SimpleBNB Owner Page");
             stage.setScene(new Scene(root,600,575));
             stage.show();
-        }
-        catch(IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
