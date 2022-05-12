@@ -10,8 +10,6 @@ import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
 import org.loose.fis.sre.services.BookingRequestService;
-import org.loose.fis.sre.controllers.UpcomingReservationsController;
-import org.loose.fis.sre.controllers.PastReservationsController;
 
 import java.io.IOException;
 

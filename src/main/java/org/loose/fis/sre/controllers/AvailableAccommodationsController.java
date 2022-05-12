@@ -11,13 +11,8 @@ import org.loose.fis.sre.model.BookingRequest;
 import org.loose.fis.sre.services.BookingRequestService;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import org.loose.fis.sre.exceptions.PropertyDoesNotExistException;
-import org.loose.fis.sre.model.PropertyUnavailable;
 import org.loose.fis.sre.model.Property;
 import org.loose.fis.sre.services.PropertyService;
-import org.loose.fis.sre.services.PropertyUnavailableService;
-import org.loose.fis.sre.exceptions.PropertyAlreadyUnavailableException;
-import org.loose.fis.sre.exceptions.IncorrectDateException;
 
 public class AvailableAccommodationsController {
 

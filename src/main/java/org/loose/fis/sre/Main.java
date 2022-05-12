@@ -5,11 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.loose.fis.sre.services.FileSystemService;
-import org.loose.fis.sre.services.PropertyService;
-import org.loose.fis.sre.services.UserService;
-import org.loose.fis.sre.services.PropertyUnavailableService;
-import org.loose.fis.sre.services.BookingRequestService;
+import org.loose.fis.sre.services.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

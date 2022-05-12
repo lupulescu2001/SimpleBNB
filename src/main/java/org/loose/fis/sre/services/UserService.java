@@ -3,7 +3,6 @@ package org.loose.fis.sre.services;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
-import org.loose.fis.sre.model.BookingRequest;
 import org.loose.fis.sre.model.User;
 import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import java.nio.charset.StandardCharsets;
@@ -13,9 +12,8 @@ import java.util.Objects;
 import java.util.List;
 import org.loose.fis.sre.exceptions.MarkIsIncorrectException;
 import org.loose.fis.sre.exceptions.ClientDoesNotHavePastReservationsException;
-
-
-import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
+import org.loose.fis.sre.services.BookingRequestService;
+import org.loose.fis.sre.services.FileSystemService;
 
 public class UserService {
 
@@ -23,7 +21,7 @@ public class UserService {
 
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("SimpleBNB1.db").toFile())
+                .filePath(FileSystemService.getPathToFile("SimpleBNB1.db").toFile())
                 .openOrCreate("SimpleBNB1", "SimpleBNB1");
 
         userRepository = database.getRepository(User.class);
@@ -57,7 +55,7 @@ public class UserService {
         }
     }
 
-    private static String encodePassword(String salt, String password) {
+    public static String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();
         md.update(salt.getBytes(StandardCharsets.UTF_8));
 

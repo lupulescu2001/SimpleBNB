@@ -5,7 +5,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import org.loose.fis.sre.exceptions.ClientDoesNotHavePastReservationsException;
 import org.loose.fis.sre.exceptions.MarkIsIncorrectException;
-import org.loose.fis.sre.model.User;
 import org.loose.fis.sre.services.BookingRequestService;
 import org.loose.fis.sre.services.UserService;
 import javafx.scene.text.Text;
