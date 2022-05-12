@@ -1,29 +1,22 @@
 package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
-import org.dizitart.no2.objects.Id;
 import org.dizitart.no2.objects.ObjectRepository;
-import org.jetbrains.annotations.NotNull;
 import org.loose.fis.sre.exceptions.IncorrectScoreException;
-import org.loose.fis.sre.services.BookingRequestService;
 import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
 import org.loose.fis.sre.model.Property;
-import org.loose.fis.sre.model.User;
 import org.loose.fis.sre.exceptions.PropertyDoesNotExistException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import org.dizitart.no2.objects.filters.ObjectFilters;
+import org.loose.fis.sre.services.BookingRequestService;
+import org.loose.fis.sre.services.FileSystemService;
 
-import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
+import java.util.*;
 
 public class PropertyService {
     private static ObjectRepository<Property> propertyRepository;
 
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("SimpleBNBproperty2.db").toFile())
+                .filePath(FileSystemService.getPathToFile("SimpleBNBproperty2.db").toFile())
                 .openOrCreate("SimpleBNBproperty2", "SimpleBNBproperty2");
 
         propertyRepository = database.getRepository(Property.class);

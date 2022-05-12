@@ -4,9 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import java.util.ArrayList;
 
-import javafx.stage.Stage;
 import java.util.List;
 
 import org.loose.fis.sre.exceptions.IncorrectScoreException;
