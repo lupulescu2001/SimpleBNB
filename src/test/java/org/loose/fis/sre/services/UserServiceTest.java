@@ -1,6 +1,7 @@
 package org.loose.fis.sre.services;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.*;
+import org.loose.fis.sre.exceptions.IncorrectCredentials;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.model.User;
 
@@ -9,6 +10,7 @@ import static org.testfx.assertions.api.Assertions.assertThat;
 
 public class UserServiceTest {
     public static final String OWNER = "Owner";
+    public static final String CLIENT = "Client";
 
     @BeforeAll
     static void beforeAll() {
@@ -57,6 +59,41 @@ public class UserServiceTest {
             UserService.addUser(OWNER, OWNER, OWNER,OWNER,OWNER);
             UserService.addUser(OWNER, OWNER, OWNER,OWNER,OWNER);
         });
+    }
+
+    @Test
+    @DisplayName("Login credentials are ok ")
+    void testCheckCorrectUserCredentials() throws UsernameAlreadyExistsException, IncorrectCredentials {
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        assertThat(UserService.CheckUserCredentials(OWNER,OWNER,OWNER)).isEqualTo(2);
+        UserService.addUser(CLIENT,CLIENT,CLIENT,CLIENT,CLIENT);
+        assertThat(UserService.CheckUserCredentials(CLIENT,CLIENT,CLIENT)).isEqualTo(1);
+
+
+    }
+    @Test
+    @DisplayName("Login credentials not correct")
+    void testCheckIncorrectUserCredentials() throws UsernameAlreadyExistsException{
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        assertThrows(IncorrectCredentials.class,() ->{
+            UserService.CheckUserCredentials(OWNER,CLIENT,OWNER);
+        });
+        assertThrows(IncorrectCredentials.class,() ->{
+            UserService.CheckUserCredentials(CLIENT,OWNER,OWNER);
+        });
+        assertThrows(IncorrectCredentials.class,() ->{
+            UserService.CheckUserCredentials(OWNER,OWNER,CLIENT);
+        });
+    }
+    @Test
+    @DisplayName("Get role by username function")
+    void testGetRoleByUsername() throws IncorrectCredentials,UsernameAlreadyExistsException{
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        assertThat(UserService.getRoleByUsername(OWNER)).isEqualTo(OWNER);
+        assertThrows(IncorrectCredentials.class,() -> {
+            UserService.getRoleByUsername(CLIENT);
+        });
+
     }
 
 

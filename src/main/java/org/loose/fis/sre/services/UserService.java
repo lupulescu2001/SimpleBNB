@@ -30,9 +30,9 @@ public class UserService {
         String role= new String();
         int ok=0;
         for(User user:userRepository.find()){
-            if(Objects.equals(user.getUsername(),username))
+            if(Objects.equals(user.getUsername(),username)){
                 role=user.getRole();
-            ok=1;
+                ok=1;}
         }
         if(ok==0)
             throw new IncorrectCredentials(username);

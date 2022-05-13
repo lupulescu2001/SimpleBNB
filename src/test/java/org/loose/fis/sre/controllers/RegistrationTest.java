@@ -1,4 +1,4 @@
-package org.loose.fis.sre;
+package org.loose.fis.sre.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -39,7 +39,7 @@ public class RegistrationTest {
     @Start
     void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-        primaryStage.setTitle("Registration Example");
+        primaryStage.setTitle("Registration Test");
         primaryStage.setScene(new Scene(root, 600, 575));
         primaryStage.show();
     }
