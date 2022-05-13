@@ -10,7 +10,7 @@ public class Property {
     private String cityName;
     private String description;
     private String username;
-    private int sum_of_reviews;
+    private float sum_of_reviews;
     private int nr_of_reviews;
 
     public Property(String cityName, String description, String username, String name) {
@@ -28,13 +28,13 @@ public class Property {
             return 0;
         return (float)this.sum_of_reviews/this.nr_of_reviews;
     }
-    public void setSum_of_reviews(int newSum){
+    public void setSum_of_reviews(float newSum){
         this.sum_of_reviews=newSum;
     }
     public void setNr_of_reviews(int newNr){
         this.nr_of_reviews=newNr;
     }
-    public int getSum_of_reviews(){
+    public float getSum_of_reviews(){
         return this.sum_of_reviews;
     }
 

@@ -20,17 +20,17 @@
 
     <Label text="Name of property to review :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-    <TextField fx:id="ReviewedPropName" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <TextField fx:id="ReviewedPropName" id="propname" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
     <Label text="Leave review (a score from 1 to 10) :" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
-    <TextField fx:id="Review" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <TextField fx:id="Review" id="review" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="7">
-        <Button onAction="#handleClickLeaveReviewAction" text="Leave Review"/>
+        <Button onAction="#handleClickLeaveReviewAction" id="leavereview" text="Leave Review"/>
     </HBox>
 
-    <Text fx:id="Message" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+    <Text fx:id="Message" id="message" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
 
 
 

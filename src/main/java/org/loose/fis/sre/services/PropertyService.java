@@ -65,7 +65,7 @@ public class PropertyService {
         return sol;
 
     }
-    public static void addReview(String prop_name,int rev,String client_username) throws IncorrectScoreException,PropertyDoesNotExistException {
+    public static void addReview(String prop_name,float rev,String client_username) throws IncorrectScoreException,PropertyDoesNotExistException {
 
         if(rev<1 || rev>10)
             throw new IncorrectScoreException();
@@ -81,7 +81,7 @@ public class PropertyService {
             if(Objects.equals(prop_name,property.getName()))
             {
                 int nr=property.getNr_of_reviews();
-                int sum=property.getSum_of_reviews();
+                float sum=property.getSum_of_reviews();
 
                 nr+=1;
                 sum+=rev;

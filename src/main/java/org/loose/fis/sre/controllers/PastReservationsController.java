@@ -11,6 +11,7 @@ import org.loose.fis.sre.exceptions.IncorrectScoreException;
 import org.loose.fis.sre.exceptions.PropertyDoesNotExistException;
 import org.loose.fis.sre.model.Property;
 import org.loose.fis.sre.services.PropertyService;
+import java.util.*;
 
 public class PastReservationsController {
 
@@ -38,7 +39,9 @@ public class PastReservationsController {
     @FXML
     public void handleClickLeaveReviewAction(){
         try{
-            PropertyService.addReview(ReviewedPropName.getText(),Integer.parseInt(Review.getText()),clientUsername);
+            if(Objects.equals(clientUsername,null))
+                clientUsername="USERNAME";
+            PropertyService.addReview(ReviewedPropName.getText(),Float.parseFloat(Review.getText()),clientUsername);
             Property prop= PropertyService.getPropertyByName(ReviewedPropName.getText());
             Message.setText("New review : " + prop.getReview());
         }
