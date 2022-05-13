@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.loose.fis.sre.controllers.LoginTest" time="2.454" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.loose.fis.sre.services.PropertyServiceTest" time="0.244" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="javafx.runtime.version" value="15.0.1+1"/>
@@ -59,5 +59,21 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testLogin(FxRobot)" classname="org.loose.fis.sre.controllers.LoginTest" time="2.451"/>
+  <testcase name="testBadReview" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.067">
+    <system-out><![CDATA[Before Class
+After each
+]]></system-out>
+  </testcase>
+  <testcase name="testAddReviewToNonExistentProperty" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.062">
+    <system-out><![CDATA[After each
+]]></system-out>
+  </testcase>
+  <testcase name="testDatabaseIsInitializedAndNoUserIsPersisted" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.051">
+    <system-out><![CDATA[After each
+]]></system-out>
+  </testcase>
+  <testcase name="testAddReview" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.06">
+    <system-out><![CDATA[After each
+]]></system-out>
+  </testcase>
 </testsuite>
