@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.loose.fis.sre.services.PropertyServiceTest" time="0.253" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.loose.fis.sre.services.BookingRequestServiceTest" time="0.237" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="javafx.runtime.version" value="15.0.1+1"/>
@@ -59,20 +59,20 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testBadReview" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.061">
+  <testcase name="testBookingRequestIsAdded" classname="org.loose.fis.sre.services.BookingRequestServiceTest" time="0.064">
     <system-out><![CDATA[Before Class
 After each
 ]]></system-out>
   </testcase>
-  <testcase name="testAddReviewToNonExistentProperty" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.063">
+  <testcase name="testGetAllPastRequestsForUser" classname="org.loose.fis.sre.services.BookingRequestServiceTest" time="0.059">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
-  <testcase name="testDatabaseIsInitializedAndNoUserIsPersisted" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.058">
+  <testcase name="testGetAllUpcomingRequestsForUser" classname="org.loose.fis.sre.services.BookingRequestServiceTest" time="0.056">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
-  <testcase name="testAddReview" classname="org.loose.fis.sre.services.PropertyServiceTest" time="0.069">
+  <testcase name="testDatabaseIsInitialized" classname="org.loose.fis.sre.services.BookingRequestServiceTest" time="0.052">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
