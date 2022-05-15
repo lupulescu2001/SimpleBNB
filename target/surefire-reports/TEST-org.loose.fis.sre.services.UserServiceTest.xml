@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.loose.fis.sre.services.UserServiceTest" time="0.229" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.loose.fis.sre.services.UserServiceTest" time="0.248" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="javafx.runtime.version" value="15.0.1+1"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="RO"/>
     <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/18/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/alexkosa/Desktop/SimpleBNB/target/surefire/surefirebooter715953848544252066.jar /Users/alexkosa/Desktop/SimpleBNB/target/surefire 2022-05-13T18-27-59_282-jvmRun1 surefire3870667354933109748tmp surefire_06601795340321679536tmp"/>
+    <property name="sun.java.command" value="/Users/alexkosa/Desktop/SimpleBNB/target/surefire/surefirebooter5083131715345621912.jar /Users/alexkosa/Desktop/SimpleBNB/target/surefire 2022-05-15T15-13-27_381-jvmRun1 surefire5581808382671585531tmp surefire_013782252721965935107tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/alexkosa/Desktop/SimpleBNB/target/test-classes:/Users/alexkosa/Desktop/SimpleBNB/target/classes:/Users/alexkosa/.m2/repository/org/openjfx/javafx-controls/15.0.1/javafx-controls-15.0.1.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-controls/15.0.1/javafx-controls-15.0.1-mac.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1-mac.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-base/15.0.1/javafx-base-15.0.1.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-base/15.0.1/javafx-base-15.0.1-mac.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-fxml/15.0.1/javafx-fxml-15.0.1.jar:/Users/alexkosa/.m2/repository/org/openjfx/javafx-fxml/15.0.1/javafx-fxml-15.0.1-mac.jar:/Users/alexkosa/.m2/repository/org/dizitart/nitrite/3.4.3/nitrite-3.4.3.jar:/Users/alexkosa/.m2/repository/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar:/Users/alexkosa/.m2/repository/com/h2database/h2-mvstore/1.4.200/h2-mvstore-1.4.200.jar:/Users/alexkosa/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:/Users/alexkosa/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.1/jackson-annotations-2.10.1.jar:/Users/alexkosa/.m2/repository/org/jasypt/jasypt/1.9.3/jasypt-1.9.3.jar:/Users/alexkosa/.m2/repository/com/squareup/okhttp3/okhttp/4.3.1/okhttp-4.3.1.jar:/Users/alexkosa/.m2/repository/com/squareup/okio/okio/2.4.1/okio-2.4.1.jar:/Users/alexkosa/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.3.50/kotlin-stdlib-common-1.3.50.jar:/Users/alexkosa/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.3.61/kotlin-stdlib-1.3.61.jar:/Users/alexkosa/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/alexkosa/.m2/repository/uk/co/jemos/podam/podam/7.2.3.RELEASE/podam-7.2.3.RELEASE.jar:/Users/alexkosa/.m2/repository/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar:/Users/alexkosa/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/Users/alexkosa/.m2/repository/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar:/Users/alexkosa/.m2/repository/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar:/Users/alexkosa/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.10.1/jackson-databind-2.10.1.jar:/Users/alexkosa/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.10.1/jackson-core-2.10.1.jar:/Users/alexkosa/.m2/repository/org/testfx/testfx-core/4.0.16-alpha/testfx-core-4.0.16-alpha.jar:/Users/alexkosa/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/alexkosa/.m2/repository/org/testfx/testfx-junit5/4.0.16-alpha/testfx-junit5-4.0.16-alpha.jar:/Users/alexkosa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.5.1/junit-jupiter-api-5.5.1.jar:/Users/alexkosa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/Users/alexkosa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/alexkosa/.m2/repository/org/junit/platform/junit-platform-commons/1.5.1/junit-platform-commons-1.5.1.jar:/Users/alexkosa/.m2/repository/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar:/Users/alexkosa/.m2/repository/commons-io/commons-io/2.8.0/commons-io-2.8.0.jar:"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/alexkosa/Desktop/SimpleBNB/target/surefire/surefirebooter715953848544252066.jar"/>
+    <property name="surefire.real.class.path" value="/Users/alexkosa/Desktop/SimpleBNB/target/surefire/surefirebooter5083131715345621912.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="18+0"/>
@@ -59,28 +59,28 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testDatabaseIsInitializedAndNoUserIsPersisted" classname="org.loose.fis.sre.services.UserServiceTest" time="0.035">
+  <testcase name="testDatabaseIsInitializedAndNoUserIsPersisted" classname="org.loose.fis.sre.services.UserServiceTest" time="0.028">
     <system-out><![CDATA[Before Class
 After each
 ]]></system-out>
   </testcase>
-  <testcase name="testCheckIncorrectUserCredentials" classname="org.loose.fis.sre.services.UserServiceTest" time="0.037">
+  <testcase name="testCheckIncorrectUserCredentials" classname="org.loose.fis.sre.services.UserServiceTest" time="0.049">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
-  <testcase name="testUserIsAddedToDatabase" classname="org.loose.fis.sre.services.UserServiceTest" time="0.041">
+  <testcase name="testUserIsAddedToDatabase" classname="org.loose.fis.sre.services.UserServiceTest" time="0.046">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
-  <testcase name="testUserCanNotBeAddedTwice" classname="org.loose.fis.sre.services.UserServiceTest" time="0.037">
+  <testcase name="testUserCanNotBeAddedTwice" classname="org.loose.fis.sre.services.UserServiceTest" time="0.04">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
-  <testcase name="testGetRoleByUsername" classname="org.loose.fis.sre.services.UserServiceTest" time="0.033">
+  <testcase name="testGetRoleByUsername" classname="org.loose.fis.sre.services.UserServiceTest" time="0.041">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
-  <testcase name="testCheckCorrectUserCredentials" classname="org.loose.fis.sre.services.UserServiceTest" time="0.037">
+  <testcase name="testCheckCorrectUserCredentials" classname="org.loose.fis.sre.services.UserServiceTest" time="0.04">
     <system-out><![CDATA[After each
 ]]></system-out>
   </testcase>
