@@ -54,20 +54,20 @@ public class SearchAccommodationControllerTest {
     @Test
     void TestSearchAccommodation(FxRobot robot) throws PropertyAlreadyExistsException, IncorrectDateException, PropertyDoesNotExistException, PropertyAlreadyUnavailableException {
         PropertyService.addProperty("NAME",CITYNAME,"BUN","lupu");
-        PropertyUnavailable propertyUnavailable = new PropertyUnavailable(0,"lupu","NAME","2","3","2023","4","3","2023");
+        PropertyUnavailable propertyUnavailable = new PropertyUnavailable(0,"lupu","NAME","1","1","2023","2","1","2023");
         PropertyUnavailableService.addUnavailableDate(propertyUnavailable);
         robot.clickOn("#cityname");
         robot.write("Timisoara2");
         robot.clickOn("#checkinday");
-        robot.write("2");
+        robot.write("1");
         robot.clickOn("#checkinmonth");
-        robot.write("3");
+        robot.write("1");
         robot.clickOn("#checkinyear");
         robot.write("2023");
         robot.clickOn("#checkoutday");
-        robot.write("4");
+        robot.write("2");
         robot.clickOn("#checkoutmonth");
-        robot.write("3");
+        robot.write("1");
         robot.clickOn("#checkoutyear");
         robot.write("2023");
         robot.clickOn("#search");
@@ -78,13 +78,16 @@ public class SearchAccommodationControllerTest {
         robot.press(KeyCode.BACK_SPACE);
         robot.clickOn("#search");
         assertThat(robot.lookup("#message").queryText()).hasText("No properties available, please introduce different dates");
-        robot.clickOn("#checkinmonth");
-        robot.write("3");
+        robot.clickOn("#checkinday");
+        robot.write("0");
         robot.clickOn("#search");
-        assertThat(robot.lookup("#message").queryText()).hasText("The following dates are incorrect: 2/33/2023 and 4/3/2023");
+        assertThat(robot.lookup("#message").queryText()).hasText("The following dates are incorrect: 10/1/2023 and 2/1/2023");
+        robot.clickOn("#checkoutday");
+        robot.write("0");
 
-
+        robot.clickOn("#search");
 
     }
+
 
 }
