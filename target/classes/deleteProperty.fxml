@@ -15,12 +15,12 @@
 
     <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
-    <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <TextField fx:id="nameField" id = "name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
 
 
     <Text fx:id="addMessage" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
-        <Button onAction="#handleDeletePropertyAction" text="Delete"/>
+        <Button onAction="#handleDeletePropertyAction" id = "delete" text="Delete"/>
     </HBox>
 </GridPane>

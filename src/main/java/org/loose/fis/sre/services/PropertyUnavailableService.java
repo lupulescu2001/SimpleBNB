@@ -105,4 +105,7 @@ public class PropertyUnavailableService {
                 id = (id > propertyUnavailable.getId() + 1) ? id : (propertyUnavailable.getId() + 1);
         return id;
     }
+    public static List<PropertyUnavailable> getAll() {
+        return propertyUnavailableRepository.find().toList();
+    }
 }
