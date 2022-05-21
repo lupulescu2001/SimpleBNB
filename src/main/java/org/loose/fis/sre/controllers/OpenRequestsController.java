@@ -66,6 +66,7 @@ public class OpenRequestsController {
             BookingRequestService.setBookingStatus(currentId, 1);
             listView.getItems().remove(currentRequest);
             addMessage.setText("Request Accepted successfully!");
+            currentId = -1;
         } catch (NoRequestSelectedException e) {
             addMessage.setText(e.getMessage());
         } catch (PropertyDoesNotExistException e) {
@@ -83,6 +84,7 @@ public class OpenRequestsController {
             BookingRequestService.setBookingStatus(currentId, 2);
             listView.getItems().remove(currentRequest);
             addMessage.setText("Request Denied successfully!");
+            currentId = -1;
         } catch (NoRequestSelectedException e) {
             addMessage.setText(e.getMessage());
         }
