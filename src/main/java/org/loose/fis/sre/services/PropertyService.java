@@ -67,6 +67,7 @@ public class PropertyService {
     }
     public static void addReview(String prop_name,float rev,String client_username) throws IncorrectScoreException,PropertyDoesNotExistException {
 
+
         if(rev<1 || rev>10)
             throw new IncorrectScoreException();
         int ok=0;
