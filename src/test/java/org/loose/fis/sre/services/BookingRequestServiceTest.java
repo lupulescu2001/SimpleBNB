@@ -19,6 +19,7 @@ public class BookingRequestServiceTest {
     public static final String DESCRIPTION="description";
     public static final String USERNAME="username";
     public static final String OWNERUSERNAME="lupu";
+    public static final String OWNER = "Owner";
 
     Property property=new Property(CITY_NAME,DESCRIPTION,OWNERUSERNAME,PROP_NAME);
     BookingRequest bookingRequestPast=new BookingRequest(0,USERNAME,PROP_NAME,"1","1","2015","3","1","2015",1);
@@ -44,6 +45,7 @@ public class BookingRequestServiceTest {
         FileUtils.cleanDirectory(FileSystemService.getApplicationHomeFolder().toFile());
         PropertyService.initDatabase();
         BookingRequestService.initDatabase();
+        UserService.initDatabase();
     }
     @Test
     @DisplayName("Database is initialized")
@@ -90,6 +92,49 @@ public class BookingRequestServiceTest {
 
 
     }
+    @Test
+    @DisplayName("Test getAllRequestsForOwner")
+    void testGetAllRequestsForOwner() throws UsernameAlreadyExistsException, PropertyAlreadyExistsException {
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        UserService.addUser("john", "john", "john", "john", "Client");
+        PropertyService.addProperty("la mare", "timisoara", "", OWNER);
+        BookingRequest x = new BookingRequest(0, "john","la mare","13","02","2022","15","02","2022", 0);
+        BookingRequestService.addBookingRequest(x);
+        assertThat(BookingRequestService.getAllRequestsForOwner(OWNER).size()).isEqualTo(1);
 
+    }
+    @Test
+    @DisplayName("Test getAllRequestIdsForOwner")
+    void testGetAllRequestIdsForOwner() throws UsernameAlreadyExistsException, PropertyAlreadyExistsException {
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        UserService.addUser("john", "john", "john", "john", "Client");
+        PropertyService.addProperty("la mare", "timisoara", "", OWNER);
+        BookingRequest x = new BookingRequest(0, "john","la mare","13","02","2022","15","02","2022", 0);
+        BookingRequestService.addBookingRequest(x);
+        assertThat(BookingRequestService.getAllRequestIdsForOwner(OWNER).size()).isEqualTo(1);
+
+    }
+    @Test
+    @DisplayName("Test getAllRequestIdsForOwner")
+    void testGetIdForRequest() throws UsernameAlreadyExistsException, PropertyAlreadyExistsException {
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        UserService.addUser("john", "john", "john", "john", "Client");
+        PropertyService.addProperty("la mare", "timisoara", "", OWNER);
+        BookingRequest x = new BookingRequest(0, "john","la mare","13","02","2022","15","02","2022", 0);
+        BookingRequestService.addBookingRequest(x);
+        assertThat(BookingRequestService.getIdForRequest(OWNER, "")).isEqualTo(-1);
+
+    }
+    @Test
+    @DisplayName("Test getPastClients")
+    void testGetPastClients() throws UsernameAlreadyExistsException, PropertyAlreadyExistsException {
+        UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+        UserService.addUser("john", "john", "john", "john", "Client");
+        PropertyService.addProperty("la mare", "timisoara", "", OWNER);
+        BookingRequest x = new BookingRequest(0, "john","la mare","13","02","2022","15","02","2022", 1);
+        BookingRequestService.addBookingRequest(x);
+        assertThat(BookingRequestService.getPastClients(OWNER).size()).isEqualTo(1);
+
+    }
 
 }

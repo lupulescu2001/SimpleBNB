@@ -2,7 +2,9 @@ package org.loose.fis.sre.services;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.*;
 import org.loose.fis.sre.exceptions.IncorrectCredentials;
+import org.loose.fis.sre.exceptions.MarkIsIncorrectException;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
+import org.loose.fis.sre.model.BookingRequest;
 import org.loose.fis.sre.model.User;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,6 +28,7 @@ public class UserServiceTest {
         FileSystemService.APPLICATION_FOLDER = ".SimpleBNB";
         FileUtils.cleanDirectory(FileSystemService.getApplicationHomeFolder().toFile());
         UserService.initDatabase();
+        BookingRequestService.initDatabase();
     }
     @AfterEach
     void tearDown() {
@@ -94,6 +97,17 @@ public class UserServiceTest {
             UserService.getRoleByUsername(CLIENT);
         });
 
+    }
+    @Test
+    @DisplayName("Add review function")
+    void testAddReview() throws MarkIsIncorrectException, UsernameAlreadyExistsException {
+        assertThrows(MarkIsIncorrectException.class,() ->{
+            UserService.addUser(OWNER,OWNER,OWNER,OWNER,OWNER);
+            UserService.addUser("john", "john", "john", "john", "Client");
+            BookingRequest x = new BookingRequest(0, "john","la mare","13","02","2022","15","02","2022", 1);
+            BookingRequestService.addBookingRequest(x);
+            UserService.addReview(OWNER, "john", "12");
+        });
     }
 
 
