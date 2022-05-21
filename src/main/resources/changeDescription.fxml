@@ -15,16 +15,16 @@
 
     <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
-    <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <TextField fx:id="nameField" id = "name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
     <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-    <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <TextField fx:id="descriptionField" id = "description" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
 
 
-    <Text fx:id="addMessage" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Text fx:id="addMessage" id = "addmessage" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
-        <Button onAction="#handleChangeDescriptionAction" text="Apply changes"/>
+        <Button onAction="#handleChangeDescriptionAction" id ="change" text="Apply changes"/>
     </HBox>
 </GridPane>
