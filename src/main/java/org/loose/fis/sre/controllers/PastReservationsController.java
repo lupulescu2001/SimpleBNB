@@ -45,6 +45,9 @@ public class PastReservationsController {
             Property prop= PropertyService.getPropertyByName(ReviewedPropName.getText());
             Message.setText("New review : " + prop.getReview());
         }
+        catch(NumberFormatException e) {
+            Message.setText("Please introduce a number");
+        }
         catch (IncorrectScoreException e){
             Message.setText(e.getMessage());}
         catch (PropertyDoesNotExistException e){
