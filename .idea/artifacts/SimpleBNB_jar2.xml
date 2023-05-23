@@ -1,0 +1,36 @@
+<component name="ArtifactManager">
+  <artifact name="SimpleBNB:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/SimpleBNB_jar2</output-path>
+    <root id="root">
+      <element id="archive" name="SimpleBNB.jar">
+        <element id="module-output" name="SimpleBNB" />
+      </element>
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.1" />
+      <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
+      <element id="library" level="project" name="Maven: org.objenesis:objenesis:2.6" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:15.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:15.0.1" />
+      <element id="library" level="project" name="Maven: org.jasypt:jasypt:1.9.3" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.61" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:mac:15.0.1" />
+      <element id="library" level="project" name="Maven: com.squareup.okio:okio:2.4.1" />
+      <element id="library" level="project" name="Maven: org.dizitart:nitrite:3.4.3" />
+      <element id="library" level="project" name="Maven: uk.co.jemos.podam:podam:7.2.3.RELEASE" />
+      <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.3.2" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.50" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:15.0.1" />
+      <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:4.3.1" />
+      <element id="library" level="project" name="Maven: com.h2database:h2-mvstore:1.4.200" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:mac:15.0.1" />
+      <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:mac:15.0.1" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.10.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:15.0.1" />
+      <element id="library" level="project" name="Maven: net.jcip:jcip-annotations:1.0" />
+      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.8.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:mac:15.0.1" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.1" />
+    </root>
+  </artifact>
+</component>

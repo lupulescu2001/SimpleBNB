@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="SimpleBNB">
+    <output-path>$PROJECT_DIR$/out/artifacts/SimpleBNB</output-path>
+    <root id="root">
+      <element id="archive" name="SimpleBNB.jar">
+        <element id="module-output" name="SimpleBNB" />
+      </element>
+    </root>
+  </artifact>
+</component>
