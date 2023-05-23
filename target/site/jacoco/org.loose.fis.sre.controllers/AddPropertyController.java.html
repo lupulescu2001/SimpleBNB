@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddPropertyController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimpleBNB</a> &gt; <a href="index.source.html" class="el_package">org.loose.fis.sre.controllers</a> &gt; <span class="el_source">AddPropertyController.java</span></div><h1>AddPropertyController.java</h1><pre class="source lang-java linenums">package org.loose.fis.sre.controllers;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
+import org.loose.fis.sre.services.PropertyService;
+
+<span class="nc" id="L9">public class AddPropertyController {</span>
+    @FXML
+    private TextField nameField;
+    private String username;
+    @FXML
+    private TextField descriptionField;
+    @FXML
+    private TextField cityNameField;
+    @FXML
+    private Text addMessage;
+    public void setUsername(String username) {
+<span class="nc" id="L20">        this.username = username;</span>
+<span class="nc" id="L21">    }</span>
+    public void handleAddPropertyAction() {
+        try {
+<span class="nc" id="L24">            PropertyService.addProperty(nameField.getText(), cityNameField.getText(), descriptionField.getText(), this.username);</span>
+<span class="nc" id="L25">            addMessage.setText(&quot;Property Added Successfully&quot;);</span>
+<span class="nc" id="L26">        } catch (PropertyAlreadyExistsException e) {</span>
+<span class="nc" id="L27">            addMessage.setText(e.getMessage());</span>
+<span class="nc" id="L28">        }</span>
+<span class="nc" id="L29">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

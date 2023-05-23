@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PropertyUnavailable.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimpleBNB</a> &gt; <a href="index.source.html" class="el_package">org.loose.fis.sre.model</a> &gt; <span class="el_source">PropertyUnavailable.java</span></div><h1>PropertyUnavailable.java</h1><pre class="source lang-java linenums">package org.loose.fis.sre.model;
+
+import org.dizitart.no2.objects.Id;
+
+import java.util.Objects;
+
+public class PropertyUnavailable {
+    @Id
+    private int id;
+<span class="fc" id="L10">    private static int globalId = 0;</span>
+    private String username;
+    private String name;
+    private String firstDay;
+    private String firstMonth;
+    private String firstYear;
+    private String lastDay;
+    private String lastMonth;
+    private String lastYear;
+    public PropertyUnavailable(int id, String username, String name, String firstDay, String firstMonth, String firstYear, String lastDay,
+<span class="fc" id="L20">             String lastMonth, String lastYear) {</span>
+<span class="fc" id="L21">        this.id = id;</span>
+<span class="fc" id="L22">        this.username = username;</span>
+<span class="fc" id="L23">        this.name = name;</span>
+<span class="fc" id="L24">        this.firstDay = firstDay;</span>
+<span class="fc" id="L25">        this.firstMonth = firstMonth;</span>
+<span class="fc" id="L26">        this.firstYear = firstYear;</span>
+<span class="fc" id="L27">        this.lastDay = lastDay;</span>
+<span class="fc" id="L28">        this.lastMonth = lastMonth;</span>
+<span class="fc" id="L29">        this.lastYear = lastYear;</span>
+<span class="fc" id="L30">    }</span>
+<span class="fc" id="L31">    public PropertyUnavailable() {</span>
+
+<span class="fc" id="L33">    }</span>
+    public static void setGlobalId() {
+<span class="nc" id="L35">        globalId += 1;</span>
+<span class="nc" id="L36">    }</span>
+    public static int getGlobalId() {
+<span class="nc" id="L38">        return globalId;</span>
+    }
+
+    public int getId() {
+<span class="nc" id="L42">        return id;</span>
+    }
+
+    public void setName(String name) {
+<span class="fc" id="L46">        this.name = name;</span>
+<span class="fc" id="L47">    }</span>
+
+    public String getName() {
+<span class="fc" id="L50">        return name;</span>
+    }
+
+    public String getFirstDay() {
+<span class="fc" id="L54">        return firstDay;</span>
+    }
+
+    public String getFirstMonth() {
+<span class="fc" id="L58">        return firstMonth;</span>
+    }
+
+    public String getFirstYear() {
+<span class="fc" id="L62">        return firstYear;</span>
+    }
+
+    public String getLastDay() {
+<span class="fc" id="L66">        return lastDay;</span>
+    }
+
+    public String getLastMonth() {
+<span class="fc" id="L70">        return lastMonth;</span>
+    }
+
+    public String getLastYear() {
+<span class="fc" id="L74">        return lastYear;</span>
+    }
+
+    public void setFirstDay(String firstDay) {
+<span class="fc" id="L78">        this.firstDay = firstDay;</span>
+<span class="fc" id="L79">    }</span>
+
+    public void setFirstMonth(String firstMonth) {
+<span class="fc" id="L82">        this.firstMonth = firstMonth;</span>
+<span class="fc" id="L83">    }</span>
+
+    public void setFirstYear(String firstYear) {
+<span class="fc" id="L86">        this.firstYear = firstYear;</span>
+<span class="fc" id="L87">    }</span>
+
+    public void setLastDay(String lastDay) {
+<span class="fc" id="L90">        this.lastDay = lastDay;</span>
+<span class="fc" id="L91">    }</span>
+
+    public void setLastMonth(String lastMonth) {
+<span class="fc" id="L94">        this.lastMonth = lastMonth;</span>
+<span class="fc" id="L95">    }</span>
+
+    public void setLastYear(String lastYear) {
+<span class="fc" id="L98">        this.lastYear = lastYear;</span>
+<span class="fc" id="L99">    }</span>
+
+    public void setUsername(String username) {
+<span class="fc" id="L102">        this.username = username;</span>
+<span class="fc" id="L103">    }</span>
+
+    public String getUsername() {
+<span class="fc" id="L106">        return username;</span>
+    }
+
+    public boolean firstGreaterThanLast() { // returns false if not valid (last &lt;= first)
+<span class="fc" id="L110">        int fYear = Integer.parseInt(firstYear);</span>
+<span class="fc" id="L111">        int fMonth = Integer.parseInt(firstMonth);</span>
+<span class="fc" id="L112">        int fDay = Integer.parseInt(firstDay);</span>
+<span class="fc" id="L113">        int lYear = Integer.parseInt(lastYear);</span>
+<span class="fc" id="L114">        int lMonth = Integer.parseInt(lastMonth);</span>
+<span class="fc" id="L115">        int lDay = Integer.parseInt(lastDay);</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (lYear &lt; fYear)</span>
+<span class="nc" id="L117">            return false;</span>
+<span class="pc bpc" id="L118" title="3 of 4 branches missed.">        if (lMonth &lt; fMonth &amp;&amp; lYear == fYear)</span>
+<span class="nc" id="L119">            return false;</span>
+<span class="pc bpc" id="L120" title="2 of 6 branches missed.">        if (lDay &lt;= fDay &amp;&amp; lYear == fYear &amp;&amp; lMonth == fMonth)</span>
+<span class="fc" id="L121">            return false;</span>
+<span class="fc" id="L122">        return true;</span>
+    }
+    public boolean date() { // returns false if not a date
+        try {
+<span class="fc" id="L126">            Integer.parseInt(firstDay);</span>
+<span class="fc" id="L127">            Integer.parseInt(firstMonth);</span>
+<span class="fc" id="L128">            Integer.parseInt(firstYear);</span>
+<span class="fc" id="L129">            Integer.parseInt(lastDay);</span>
+<span class="fc" id="L130">            Integer.parseInt(lastMonth);</span>
+<span class="fc" id="L131">            Integer.parseInt(lastYear);</span>
+<span class="fc" id="L132">            return true;</span>
+<span class="nc" id="L133">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L134">            return false;</span>
+        }
+    }
+    public boolean validDate() { // returns false if not valid
+<span class="fc" id="L138">        int fYear = Integer.parseInt(firstYear);</span>
+<span class="fc" id="L139">        int fMonth = Integer.parseInt(firstMonth);</span>
+<span class="fc" id="L140">        int fDay = Integer.parseInt(firstDay);</span>
+<span class="fc" id="L141">        int lYear = Integer.parseInt(lastYear);</span>
+<span class="fc" id="L142">        int lMonth = Integer.parseInt(lastMonth);</span>
+<span class="fc" id="L143">        int lDay = Integer.parseInt(lastDay);</span>
+<span class="pc bpc" id="L144" title="2 of 4 branches missed.">        if (fDay &lt;= 0 || lDay &lt;= 0)</span>
+<span class="nc" id="L145">            return false;</span>
+<span class="pc bpc" id="L146" title="14 of 16 branches missed.">        if ((fMonth == 1 || fMonth == 3 || fMonth == 5 || fMonth == 7 || fMonth == 8 || fMonth == 10 || fMonth == 12) &amp;&amp; fDay &gt; 31)</span>
+<span class="nc" id="L147">            return false;</span>
+<span class="pc bpc" id="L148" title="14 of 16 branches missed.">        if ((lMonth == 1 || lMonth == 3 || lMonth == 5 || lMonth == 7 || lMonth == 8 || lMonth == 10 || lMonth == 12) &amp;&amp; lDay &gt; 31)</span>
+<span class="nc" id="L149">            return false;</span>
+<span class="pc bpc" id="L150" title="5 of 10 branches missed.">        if ((fMonth == 4 || fMonth == 6 || fMonth == 9 || fMonth == 1) &amp;&amp; fDay &gt; 30)</span>
+<span class="nc" id="L151">            return false;</span>
+<span class="pc bpc" id="L152" title="5 of 10 branches missed.">        if ((lMonth == 4 || lMonth == 6 || lMonth == 9 || lMonth == 1) &amp;&amp; lDay &gt; 30)</span>
+<span class="nc" id="L153">            return false;</span>
+<span class="pc bpc" id="L154" title="7 of 8 branches missed.">        if (fYear % 4 == 0 &amp;&amp; fYear % 100 != 0 &amp;&amp; fMonth == 2 &amp;&amp; fDay &gt; 29)</span>
+<span class="nc" id="L155">            return false;</span>
+<span class="pc bpc" id="L156" title="7 of 8 branches missed.">        if (lYear % 4 == 0 &amp;&amp; lYear % 100 != 0 &amp;&amp; lMonth == 2 &amp;&amp; lDay &gt; 29)</span>
+<span class="nc" id="L157">            return false;</span>
+<span class="pc bpc" id="L158" title="6 of 8 branches missed.">        if ((fYear % 4 != 0 || fYear % 100 == 0) &amp;&amp; fMonth == 2 &amp;&amp; fDay &gt; 28)</span>
+<span class="nc" id="L159">            return false;</span>
+<span class="pc bpc" id="L160" title="6 of 8 branches missed.">        if ((lYear % 4 != 0 || lYear % 100 == 0) &amp;&amp; lMonth == 2 &amp;&amp; lDay &gt; 28)</span>
+<span class="nc" id="L161">            return false;</span>
+<span class="fc" id="L162">        return true;</span>
+    }
+    public boolean compare(PropertyUnavailable x) { //returns true if we can add to database
+<span class="fc" id="L165">        int fYear = Integer.parseInt(this.firstYear);</span>
+<span class="fc" id="L166">        int fMonth = Integer.parseInt(this.firstMonth);</span>
+<span class="fc" id="L167">        int fDay = Integer.parseInt(this.firstDay);</span>
+<span class="fc" id="L168">        int lYear = Integer.parseInt(this.lastYear);</span>
+<span class="fc" id="L169">        int lMonth = Integer.parseInt(this.lastMonth);</span>
+<span class="fc" id="L170">        int lDay = Integer.parseInt(this.lastDay);</span>
+<span class="fc" id="L171">        int xfYear = Integer.parseInt(x.firstYear);</span>
+<span class="fc" id="L172">        int xfMonth = Integer.parseInt(x.firstMonth);</span>
+<span class="fc" id="L173">        int xfDay = Integer.parseInt(x.firstDay);</span>
+<span class="fc" id="L174">        int xlYear = Integer.parseInt(x.lastYear);</span>
+<span class="fc" id="L175">        int xlMonth = Integer.parseInt(x.lastMonth);</span>
+<span class="fc" id="L176">        int xlDay = Integer.parseInt(x.lastDay);</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">        if (lYear &lt; xfYear)</span>
+<span class="nc" id="L178">            return true;</span>
+<span class="pc bpc" id="L179" title="3 of 4 branches missed.">        if (lMonth &lt; xfMonth &amp;&amp; lYear == xfYear)</span>
+<span class="nc" id="L180">            return true;</span>
+<span class="pc bpc" id="L181" title="5 of 6 branches missed.">        if (lDay &lt;= xfDay &amp;&amp; lYear == xfYear &amp;&amp; lMonth == xfMonth)</span>
+<span class="nc" id="L182">            return true;</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">        if (fYear &gt; xlYear)</span>
+<span class="nc" id="L184">            return true;</span>
+<span class="pc bpc" id="L185" title="3 of 4 branches missed.">        if (fMonth &gt; xlMonth &amp;&amp; fYear == xlYear)</span>
+<span class="nc" id="L186">            return true;</span>
+<span class="pc bpc" id="L187" title="2 of 6 branches missed.">        if (fDay &gt;= xlDay &amp;&amp; fMonth == xlMonth &amp;&amp; fYear == xlYear)</span>
+<span class="fc" id="L188">            return true;</span>
+<span class="fc" id="L189">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

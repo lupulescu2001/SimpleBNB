@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PropertyService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimpleBNB</a> &gt; <a href="index.source.html" class="el_package">org.loose.fis.sre.services</a> &gt; <span class="el_source">PropertyService.java</span></div><h1>PropertyService.java</h1><pre class="source lang-java linenums">package org.loose.fis.sre.services;
+
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.exceptions.IncorrectScoreException;
+import org.loose.fis.sre.exceptions.PropertyAlreadyExistsException;
+import org.loose.fis.sre.model.Property;
+import org.loose.fis.sre.exceptions.PropertyDoesNotExistException;
+import org.loose.fis.sre.services.BookingRequestService;
+import org.loose.fis.sre.services.FileSystemService;
+
+import java.util.*;
+
+<span class="nc" id="L14">public class PropertyService {</span>
+    private static ObjectRepository&lt;Property&gt; propertyRepository;
+
+    public static void initDatabase() {
+<span class="fc" id="L18">        Nitrite database = Nitrite.builder()</span>
+<span class="fc" id="L19">                .filePath(FileSystemService.getPathToFile(&quot;SimpleBNBproperty2.db&quot;).toFile())</span>
+<span class="fc" id="L20">                .openOrCreate(&quot;SimpleBNBproperty2&quot;, &quot;SimpleBNBproperty2&quot;);</span>
+
+<span class="fc" id="L22">        propertyRepository = database.getRepository(Property.class);</span>
+<span class="fc" id="L23">    }</span>
+
+    public static void addProperty(String name, String cityName, String description, String username) throws PropertyAlreadyExistsException {
+<span class="fc" id="L26">        checkPropertyDoesNotAlreadyExist(name);</span>
+<span class="fc" id="L27">        propertyRepository.insert(new Property(cityName, description, username, name));</span>
+<span class="fc" id="L28">    }</span>
+    private static void checkPropertyDoesNotAlreadyExist(String name) throws PropertyAlreadyExistsException {
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        for (Property property : propertyRepository.find()) {</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            if (Objects.equals(name, property.getName()))</span>
+<span class="nc" id="L32">                throw new PropertyAlreadyExistsException(name);</span>
+<span class="nc" id="L33">        }</span>
+<span class="fc" id="L34">    }</span>
+    public static List&lt;String&gt; getAllProperties(String username){
+<span class="nc" id="L36">        List&lt;String&gt; list = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for (Property property : propertyRepository.find()) {</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (Objects.equals(username, property.getUsername()))</span>
+<span class="nc" id="L39">                list.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription());</span>
+<span class="nc" id="L40">        }</span>
+<span class="nc" id="L41">        return list;</span>
+    }
+    public static List&lt;String&gt; getAllPropertiesByName(List&lt;String&gt; list){
+<span class="fc" id="L44">        List&lt;String&gt; sol = new ArrayList&lt;String&gt;();</span>
+        float rev;
+        String review;
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        for(String x : list)</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (Property property : propertyRepository.find()) {</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">            if (Objects.equals(x, property.getName())) {</span>
+<span class="fc" id="L50">                rev = property.getReview();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">                if(rev==0)</span>
+<span class="fc" id="L52">                    review=&quot;No reviews yet&quot;;</span>
+                else
+<span class="nc" id="L54">                    review=Float.toString(rev);</span>
+<span class="fc" id="L55">                sol.add(property.getName() + '/' + property.getCityName() + '/' + property.getDescription() + '/' + review);</span>
+            }
+<span class="fc" id="L57">        }</span>
+<span class="fc" id="L58">        return sol;</span>
+    }
+    public static Property getPropertyByName(String name){
+<span class="fc" id="L61">        Property sol=new Property();</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for(Property property:propertyRepository.find())</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">            if(Objects.equals(name,property.getName()))</span>
+<span class="fc" id="L64">                sol=property;</span>
+<span class="fc" id="L65">        return sol;</span>
+
+    }
+    public static void addReview(String prop_name,float rev,String client_username) throws IncorrectScoreException,PropertyDoesNotExistException {
+
+<span class="pc bpc" id="L70" title="1 of 4 branches missed.">        if(rev&lt;1 || rev&gt;10)</span>
+<span class="fc" id="L71">            throw new IncorrectScoreException();</span>
+<span class="fc" id="L72">        int ok=0;</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        for (String s : BookingRequestService.getAllPastRequestsNameForUser(client_username)){</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            if(Objects.equals(s,prop_name))</span>
+<span class="fc" id="L75">                ok=1;</span>
+<span class="fc" id="L76">        }</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if(ok==0)</span>
+<span class="fc" id="L78">            throw new PropertyDoesNotExistException(prop_name);</span>
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for(Property property:propertyRepository.find())</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">            if(Objects.equals(prop_name,property.getName()))</span>
+            {
+<span class="fc" id="L83">                int nr=property.getNr_of_reviews();</span>
+<span class="fc" id="L84">                float sum=property.getSum_of_reviews();</span>
+
+<span class="fc" id="L86">                nr+=1;</span>
+<span class="fc" id="L87">                sum+=rev;</span>
+<span class="fc" id="L88">                property.setNr_of_reviews(nr);</span>
+<span class="fc" id="L89">                property.setSum_of_reviews(sum);</span>
+<span class="fc" id="L90">                propertyRepository.update(property);</span>
+              //  System.out.println(property.getNr_of_reviews());
+            }
+<span class="fc" id="L93">    }</span>
+
+    public static void changeDescription(String name, String username, String description) throws PropertyDoesNotExistException {
+<span class="nc" id="L96">        int ok = 0;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        for (Property property : propertyRepository.find()) {</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">            if (Objects.equals(username, property.getUsername()) &amp;&amp; Objects.equals(name, property.getName())) {</span>
+<span class="nc" id="L99">                property.setDescription(description);</span>
+<span class="nc" id="L100">                propertyRepository.update(property);</span>
+<span class="nc" id="L101">                ok = 1;</span>
+            }
+<span class="nc" id="L103">        }</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (ok == 0)</span>
+<span class="nc" id="L105">            throw new PropertyDoesNotExistException(name);</span>
+<span class="nc" id="L106">    }</span>
+    public static void deleteProperty(String name, String username) throws PropertyDoesNotExistException {
+<span class="nc" id="L108">        int ok = 0;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        for (Property property : propertyRepository.find()) {</span>
+<span class="nc bnc" id="L110" title="All 4 branches missed.">            if (Objects.equals(username, property.getUsername()) &amp;&amp; Objects.equals(name, property.getName())) {</span>
+<span class="nc" id="L111">                propertyRepository.remove(property);</span>
+<span class="nc" id="L112">                ok = 1;</span>
+            }
+<span class="nc" id="L114">        }</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (ok == 0)</span>
+<span class="nc" id="L116">            throw new PropertyDoesNotExistException(name);</span>
+<span class="nc" id="L117">    }</span>
+    public static List&lt;Property&gt; getAll(){
+<span class="fc" id="L119">        return propertyRepository.find().toList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

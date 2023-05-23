@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BookingRequestService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimpleBNB</a> &gt; <a href="index.source.html" class="el_package">org.loose.fis.sre.services</a> &gt; <span class="el_source">BookingRequestService.java</span></div><h1>BookingRequestService.java</h1><pre class="source lang-java linenums">package org.loose.fis.sre.services;
+
+import java.time.LocalDateTime;
+
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.model.BookingRequest;
+import org.loose.fis.sre.model.Property;
+import org.loose.fis.sre.model.PropertyUnavailable;
+import org.loose.fis.sre.model.User;
+
+import java.util.*;
+
+<span class="nc" id="L14">public class BookingRequestService {</span>
+
+    private static ObjectRepository&lt;BookingRequest&gt; BookingRequestRepository;
+    public static void initDatabase(){
+<span class="fc" id="L18">        Nitrite database = Nitrite.builder()</span>
+<span class="fc" id="L19">                .filePath(FileSystemService.getPathToFile(&quot;SimpleBNBbookingrequest2.db&quot;).toFile())</span>
+<span class="fc" id="L20">                .openOrCreate(&quot;SimpleBNBbookingrequest2&quot;, &quot;SimpleBNBbookingrequest2&quot;);</span>
+<span class="fc" id="L21">        BookingRequestRepository= database.getRepository(BookingRequest.class);</span>
+<span class="fc" id="L22">    }</span>
+    public static void addBookingRequest(BookingRequest b){
+<span class="fc" id="L24">        BookingRequestRepository.insert(b);</span>
+<span class="fc" id="L25">    }</span>
+    public static int getLastId(){
+<span class="nc" id="L27">        int id=0;</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for(BookingRequest bookingRequest : BookingRequestRepository.find())</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            id= (id &gt; bookingRequest.getId()) ? id : bookingRequest.getId();</span>
+<span class="nc" id="L30">        return id;</span>
+    }
+
+    public static List&lt;String&gt; getAllUpcomingRequestsForUser(String username){
+<span class="fc" id="L34">        List&lt;String&gt; sol = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L36">        LocalDateTime now= LocalDateTime.now();</span>
+
+
+
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        for (BookingRequest bookingRequest : BookingRequestRepository.find()){</span>
+<span class="pc bpc" id="L41" title="2 of 4 branches missed.">            if (bookingRequest.getRequestStatus()==1 &amp;&amp; Objects.equals(username,bookingRequest.getClientusername()))</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">                if(Integer.parseInt(bookingRequest.getCheckinYear())&gt;now.getYear() ||</span>
+<span class="pc bpc" id="L43" title="3 of 4 branches missed.">                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())&gt;now.getMonthValue())</span>
+<span class="pc bpc" id="L44" title="3 of 4 branches missed.">                || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                &amp;&amp; Integer.parseInt(bookingRequest.getCheckinDay())&gt;=now.getDayOfMonth()))</span>
+
+                {
+<span class="fc" id="L48">                sol.add(&quot;Reservation at : &quot; + bookingRequest.getPropertyName() + &quot; from &quot; + bookingRequest.getCheckinDay() +</span>
+<span class="fc" id="L49">                        &quot;/&quot;+bookingRequest.getCheckinMonth()+&quot;/&quot;+bookingRequest.getCheckinYear()+ &quot; to &quot; +</span>
+<span class="fc" id="L50">                        bookingRequest.getCheckoutDay() +</span>
+<span class="fc" id="L51">                        &quot;/&quot;+bookingRequest.getCheckoutMonth()+&quot;/&quot;+bookingRequest.getCheckoutYear() + &quot; was approved &quot;);</span>
+                }
+<span class="fc" id="L53">        }</span>
+
+
+<span class="fc" id="L56">        return sol;</span>
+    }
+
+    public static List&lt;String&gt; getAllPastRequestsForUser(String username){
+<span class="fc" id="L60">        List&lt;String&gt; sol = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L62">        LocalDateTime now= LocalDateTime.now();</span>
+
+
+
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        for (BookingRequest bookingRequest : BookingRequestRepository.find()){</span>
+<span class="pc bpc" id="L67" title="2 of 4 branches missed.">            if (bookingRequest.getRequestStatus()==1 &amp;&amp; Objects.equals(username,bookingRequest.getClientusername()))</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">                if(Integer.parseInt(bookingRequest.getCheckinYear())&lt;now.getYear() ||</span>
+<span class="pc bpc" id="L69" title="3 of 4 branches missed.">                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())&lt;now.getMonthValue())</span>
+<span class="pc bpc" id="L70" title="3 of 4 branches missed.">                        || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                        &amp;&amp; Integer.parseInt(bookingRequest.getCheckinDay())&lt;=now.getDayOfMonth()))</span>
+
+                {
+<span class="fc" id="L74">                    sol.add(&quot;Reservation at : &quot; + bookingRequest.getPropertyName() + &quot; from &quot; + bookingRequest.getCheckinDay() +</span>
+<span class="fc" id="L75">                            &quot;/&quot;+bookingRequest.getCheckinMonth()+&quot;/&quot;+bookingRequest.getCheckinYear()+ &quot; to &quot; +</span>
+<span class="fc" id="L76">                            bookingRequest.getCheckoutDay() +</span>
+<span class="fc" id="L77">                            &quot;/&quot;+bookingRequest.getCheckoutMonth()+&quot;/&quot;+bookingRequest.getCheckoutYear() + &quot; was approved &quot;);</span>
+                }
+<span class="fc" id="L79">        }</span>
+
+
+<span class="fc" id="L82">        return sol;</span>
+    }
+
+    public static List&lt;String&gt; getAllPastRequestsNameForUser(String username){
+<span class="fc" id="L86">        List&lt;String&gt; sol = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L88">        LocalDateTime now= LocalDateTime.now();</span>
+
+
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (BookingRequest bookingRequest : BookingRequestRepository.find()){</span>
+<span class="pc bpc" id="L93" title="2 of 4 branches missed.">            if (bookingRequest.getRequestStatus()==1 &amp;&amp; Objects.equals(username,bookingRequest.getClientusername()))</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">                if(Integer.parseInt(bookingRequest.getCheckinYear())&lt;now.getYear() ||</span>
+<span class="pc bpc" id="L95" title="3 of 4 branches missed.">                        (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())&lt;now.getMonthValue())</span>
+<span class="pc bpc" id="L96" title="3 of 4 branches missed.">                        || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                        &amp;&amp; Integer.parseInt(bookingRequest.getCheckinDay())&lt;=now.getDayOfMonth()))</span>
+
+                {
+<span class="fc" id="L100">                    sol.add(bookingRequest.getPropertyName());</span>
+                }
+<span class="fc" id="L102">        }</span>
+
+
+<span class="fc" id="L105">        return sol;</span>
+    }
+
+    public static List&lt;String&gt; getAllRequestsForOwner(String username) {
+<span class="nc" id="L109">        List&lt;Property&gt; propertyList = PropertyService.getAll();</span>
+<span class="nc" id="L110">        List&lt;String&gt; propertyNameList = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L111">        List&lt;String&gt; returnList = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        for (Property property : propertyList)</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (Objects.equals(property.getUsername(), username))</span>
+<span class="nc" id="L114">                propertyNameList.add(property.getName());</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        for (BookingRequest bookingRequest: BookingRequestRepository.find()) {</span>
+<span class="nc" id="L116">            int ok = 0;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            for (String x : propertyNameList)</span>
+<span class="nc bnc" id="L118" title="All 4 branches missed.">                if (Objects.equals(bookingRequest.getPropertyName(), x) &amp;&amp; bookingRequest.getRequestStatus() == 0)</span>
+<span class="nc" id="L119">                    ok = 1;</span>
+<span class="nc" id="L120">            int rev = 0, mrk = 0;</span>
+<span class="nc" id="L121">            String smth = &quot;abc&quot;;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            for (User user : UserService.getAllUsers())</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                if (Objects.equals(user.getUsername(), bookingRequest.getClientusername())) {</span>
+<span class="nc" id="L124">                    mrk = user.getMark();</span>
+<span class="nc" id="L125">                    rev = user.getReviews();</span>
+<span class="nc" id="L126">                    smth = user.getUsername();</span>
+                }
+<span class="nc bnc" id="L128" title="All 4 branches missed.">            if (ok == 1 &amp;&amp; rev &gt; 0)</span>
+<span class="nc" id="L129">                returnList.add(bookingRequest.getClientusername() + &quot; wants to rent the property &quot; + bookingRequest.getPropertyName() + &quot; during &quot; +</span>
+<span class="nc" id="L130">                        bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + &quot; and &quot; +</span>
+<span class="nc" id="L131">                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + &quot; and the reviews are &quot; + 1.0 * mrk / rev);</span>
+<span class="nc bnc" id="L132" title="All 4 branches missed.">            if (ok == 1 &amp;&amp; rev == 0)</span>
+<span class="nc" id="L133">                returnList.add(bookingRequest.getClientusername() + &quot; wants to rent the property &quot; + bookingRequest.getPropertyName() + &quot; during &quot; +</span>
+<span class="nc" id="L134">                        bookingRequest.getCheckinDay() + '/' + bookingRequest.getCheckinMonth() + '/' + bookingRequest.getCheckinYear() + &quot; and &quot; +</span>
+<span class="nc" id="L135">                        bookingRequest.getCheckoutDay() + '/' + bookingRequest.getCheckoutMonth() + '/' + bookingRequest.getCheckoutYear() + &quot; and he has no reviews&quot;);</span>
+<span class="nc" id="L136">        }</span>
+<span class="nc" id="L137">        return returnList;</span>
+    }
+    public static List&lt;Integer&gt; getAllRequestIdsForOwner(String username) {
+<span class="nc" id="L140">        List&lt;Property&gt; propertyList = PropertyService.getAll();</span>
+<span class="nc" id="L141">        List&lt;String&gt; propertyNameList = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L142">        List&lt;Integer&gt; returnList = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        for (Property property : propertyList)</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            if (Objects.equals(property.getUsername(), username))</span>
+<span class="nc" id="L145">                propertyNameList.add(property.getName());</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        for (BookingRequest bookingRequest: BookingRequestRepository.find()) {</span>
+<span class="nc" id="L147">            int ok = 0;</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            for (String x : propertyNameList)</span>
+<span class="nc bnc" id="L149" title="All 4 branches missed.">                if (Objects.equals(bookingRequest.getPropertyName(), x) &amp;&amp; bookingRequest.getRequestStatus() == 0)</span>
+<span class="nc" id="L150">                    ok = 1;</span>
+<span class="nc" id="L151">            int rev = 0, mrk = 0;</span>
+<span class="nc" id="L152">            String smth = &quot;abc&quot;;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">            for (User user : UserService.getAllUsers())</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                if (Objects.equals(user.getUsername(), bookingRequest.getClientusername())) {</span>
+<span class="nc" id="L155">                    mrk = user.getMark();</span>
+<span class="nc" id="L156">                    rev = user.getReviews();</span>
+<span class="nc" id="L157">                    smth = user.getUsername();</span>
+                }
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            if (ok == 1)</span>
+<span class="nc" id="L160">                returnList.add(bookingRequest.getId());</span>
+<span class="nc" id="L161">        }</span>
+<span class="nc" id="L162">        return returnList;</span>
+    }
+    public static int getIdForRequest(String username, String request) {
+<span class="nc" id="L165">        List&lt;String&gt; requestList = getAllRequestsForOwner(username);</span>
+<span class="nc" id="L166">        List&lt;Integer&gt; idList = getAllRequestIdsForOwner(username);</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for (int i = 0; i &lt; idList.size(); i++)</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            if (Objects.equals(requestList.get(i), request))</span>
+<span class="nc" id="L169">                return idList.get(i);</span>
+<span class="nc" id="L170">        return -1;</span>
+    }
+    public static List&lt;String&gt; getPastClients(String username) {
+<span class="nc" id="L173">        List&lt;Property&gt; propertyList = PropertyService.getAll();</span>
+<span class="nc" id="L174">        List&lt;String&gt; propertyNameList = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        for (Property property : propertyList)</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            if (Objects.equals(property.getUsername(), username))</span>
+<span class="nc" id="L177">                propertyNameList.add(property.getName());</span>
+<span class="nc" id="L178">        LocalDateTime now= LocalDateTime.now();</span>
+<span class="nc" id="L179">        List&lt;String&gt; sol = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        for (BookingRequest bookingRequest : BookingRequestRepository.find())</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">            if((Integer.parseInt(bookingRequest.getCheckinYear())&lt;now.getYear() ||</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">                    (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())&lt;now.getMonthValue())</span>
+<span class="nc bnc" id="L183" title="All 4 branches missed.">                    || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()</span>
+<span class="nc bnc" id="L184" title="All 4 branches missed.">                    &amp;&amp; Integer.parseInt(bookingRequest.getCheckinDay())&lt;=now.getDayOfMonth())) &amp;&amp; bookingRequest.getRequestStatus() == 1) {</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">                for (String property : propertyNameList)</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">                    if (Objects.equals(bookingRequest.getPropertyName(), property))</span>
+<span class="nc" id="L187">                        sol.add(&quot;The Client &quot; + bookingRequest.getClientusername() + &quot; stayed at : &quot; + bookingRequest.getPropertyName() + &quot; from &quot; + bookingRequest.getCheckinDay() +</span>
+<span class="nc" id="L188">                                &quot;/&quot; + bookingRequest.getCheckinMonth() + &quot;/&quot; + bookingRequest.getCheckinYear() + &quot; to &quot; +</span>
+<span class="nc" id="L189">                                bookingRequest.getCheckoutDay() +</span>
+<span class="nc" id="L190">                                &quot;/&quot; + bookingRequest.getCheckoutMonth() + &quot;/&quot; + bookingRequest.getCheckoutYear());</span>
+            }
+<span class="nc" id="L192">        return sol;</span>
+    }
+    public static List&lt;String&gt; getAllPastClients(String username) {
+<span class="nc" id="L195">        List&lt;Property&gt; propertyList = PropertyService.getAll();</span>
+<span class="nc" id="L196">        List&lt;String&gt; propertyNameList = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">        for (Property property : propertyList)</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (Objects.equals(property.getUsername(), username))</span>
+<span class="nc" id="L199">                propertyNameList.add(property.getName());</span>
+<span class="nc" id="L200">        LocalDateTime now= LocalDateTime.now();</span>
+<span class="nc" id="L201">        List&lt;String&gt; sol = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        for (BookingRequest bookingRequest : BookingRequestRepository.find())</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">            if((Integer.parseInt(bookingRequest.getCheckinYear())&lt;now.getYear() ||</span>
+<span class="nc bnc" id="L204" title="All 4 branches missed.">                    (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())&lt;now.getMonthValue())</span>
+<span class="nc bnc" id="L205" title="All 4 branches missed.">                    || (Integer.parseInt(bookingRequest.getCheckinYear())==now.getYear() &amp;&amp; Integer.parseInt(bookingRequest.getCheckinMonth())==now.getMonthValue()</span>
+<span class="nc bnc" id="L206" title="All 4 branches missed.">                    &amp;&amp; Integer.parseInt(bookingRequest.getCheckinDay())&lt;=now.getDayOfMonth())) &amp;&amp; bookingRequest.getRequestStatus() == 1) {</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">                for (String property : propertyNameList)</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">                    if (Objects.equals(bookingRequest.getPropertyName(), property))</span>
+<span class="nc" id="L209">                        sol.add(bookingRequest.getClientusername());</span>
+            }
+<span class="nc" id="L211">        return sol;</span>
+    }
+    public static void setBookingStatus(int id, int status) {
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">            if (Objects.equals(id, bookingRequest.getId())) {</span>
+<span class="nc" id="L216">                bookingRequest.setRequestStatus(status);</span>
+<span class="nc" id="L217">                BookingRequestRepository.update(bookingRequest);</span>
+            }
+<span class="nc" id="L219">        }</span>
+<span class="nc" id="L220">    }</span>
+    public static PropertyUnavailable theProperty(int id, String username) {
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        for (BookingRequest bookingRequest : BookingRequestRepository.find()) {</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">            if (Objects.equals(id, bookingRequest.getId())) {</span>
+<span class="nc" id="L224">                return new PropertyUnavailable(PropertyUnavailableService.getTheId(), username, bookingRequest.getPropertyName(),</span>
+<span class="nc" id="L225">                bookingRequest.getCheckinDay(), bookingRequest.getCheckinMonth(), bookingRequest.getCheckinYear(),</span>
+<span class="nc" id="L226">                bookingRequest.getCheckoutDay(), bookingRequest.getCheckoutMonth(), bookingRequest.getCheckoutYear());</span>
+            }
+<span class="nc" id="L228">        }</span>
+<span class="nc" id="L229">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

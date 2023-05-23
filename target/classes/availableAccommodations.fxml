@@ -14,17 +14,17 @@
 
     <Label text="Enter the name of the accommodation that you want to book :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-    <TextField fx:id="propertynameField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <TextField fx:id="propertynameField" id="propertyname" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <Button onAction="#handleBookAction" text="Book"/>
+        <Button onAction="#handleBookAction" id="book" text="Book"/>
     </HBox>
 
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button onAction="#handleHomeAction" text="Home"/>
+        <Button onAction="#handleHomeAction" id="home" text="Home"/>
     </HBox>
 
-    <Text fx:id="message" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+    <Text fx:id="message" id="message" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
 
 
 </GridPane>

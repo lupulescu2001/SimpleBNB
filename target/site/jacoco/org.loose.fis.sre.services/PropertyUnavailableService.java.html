@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PropertyUnavailableService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimpleBNB</a> &gt; <a href="index.source.html" class="el_package">org.loose.fis.sre.services</a> &gt; <span class="el_source">PropertyUnavailableService.java</span></div><h1>PropertyUnavailableService.java</h1><pre class="source lang-java linenums">package org.loose.fis.sre.services;
+
+import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.exceptions.*;
+import org.loose.fis.sre.model.Property;
+import org.loose.fis.sre.model.PropertyUnavailable;
+import org.loose.fis.sre.services.FileSystemService;
+import org.loose.fis.sre.services.PropertyService;
+
+import java.util.*;
+
+<span class="nc" id="L13">public class PropertyUnavailableService {</span>
+    private static ObjectRepository&lt;PropertyUnavailable&gt; propertyUnavailableRepository;
+    public static void initDatabase() {
+<span class="fc" id="L16">        Nitrite database = Nitrite.builder()</span>
+<span class="fc" id="L17">                .filePath(FileSystemService.getPathToFile(&quot;SimpleBNBunavailable6.db&quot;).toFile())</span>
+<span class="fc" id="L18">                .openOrCreate(&quot;SimpleBNBunavailable6&quot;, &quot;SimpleBNBunavailable6&quot;);</span>
+
+<span class="fc" id="L20">        propertyUnavailableRepository = database.getRepository(PropertyUnavailable.class);</span>
+<span class="fc" id="L21">    }</span>
+    public static void addUnavailableDate(PropertyUnavailable x) throws IncorrectDateException, PropertyDoesNotExistException, PropertyAlreadyUnavailableException {
+<span class="fc" id="L23">        checkDateIsCorrect(x);</span>
+<span class="fc" id="L24">        propertyDoesNotExist(x);</span>
+<span class="fc" id="L25">        propertyAlreadyUnavailable(x);</span>
+<span class="fc" id="L26">        propertyUnavailableRepository.insert(x);</span>
+
+<span class="fc" id="L28">    }</span>
+    public static void bookingToUnavailable(PropertyUnavailable x) throws PropertyAlreadyUnavailableException {
+<span class="nc" id="L30">        propertyAlreadyUnavailable(x);</span>
+<span class="nc" id="L31">        propertyUnavailableRepository.insert(x);</span>
+<span class="nc" id="L32">    }</span>
+    private static void checkDateIsCorrect(PropertyUnavailable x) throws IncorrectDateException {
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (x.date() == false)</span>
+<span class="nc" id="L35">            throw new IncorrectDateException(x);</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (x.validDate() == false)</span>
+<span class="nc" id="L37">            throw new IncorrectDateException(x);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (x.firstGreaterThanLast() == false)</span>
+<span class="fc" id="L39">            throw new IncorrectDateException(x);</span>
+<span class="fc" id="L40">    }</span>
+    private static void propertyAlreadyUnavailable(PropertyUnavailable x) throws PropertyAlreadyUnavailableException {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        for (PropertyUnavailable propertyUnavailable : propertyUnavailableRepository.find()) {</span>
+<span class="nc bnc" id="L43" title="All 6 branches missed.">            if (x.compare(propertyUnavailable) == false &amp;&amp; Objects.equals(x.getName(), propertyUnavailable.getName()) &amp;&amp; Objects.equals(x.getUsername(), propertyUnavailable.getUsername()))</span>
+<span class="nc" id="L44">                throw new PropertyAlreadyUnavailableException(x);</span>
+<span class="nc" id="L45">        }</span>
+<span class="fc" id="L46">    }</span>
+
+    private static void propertyDoesNotExist(PropertyUnavailable x) throws PropertyDoesNotExistException {
+<span class="fc" id="L49">        int ok = 0;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (Property property : PropertyService.getAll()) {</span>
+<span class="pc bpc" id="L51" title="2 of 4 branches missed.">            if (Objects.equals(x.getName(), property.getName()) &amp;&amp; Objects.equals(x.getUsername(), property.getUsername()))</span>
+<span class="fc" id="L52">                ok = 1;</span>
+<span class="fc" id="L53">        }</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (ok == 0)</span>
+<span class="nc" id="L55">            throw new PropertyDoesNotExistException(x.getName());</span>
+<span class="fc" id="L56">    }</span>
+
+    public static List&lt;String&gt; searchByCity(String city) throws NoPropertyInThisCity {
+<span class="fc" id="L59">        List&lt;String&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L60">        int ok=0;</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for(Property prop : PropertyService.getAll()){</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if(Objects.equals(city,prop.getCityName())){</span>
+<span class="fc" id="L63">                list.add(prop.getName());</span>
+<span class="fc" id="L64">                ok=1;</span>
+            }
+<span class="fc" id="L66">        }</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if(ok==0)</span>
+<span class="fc" id="L68">            throw new NoPropertyInThisCity(city);</span>
+<span class="fc" id="L69">        return list;</span>
+    }
+    public static List&lt;String&gt; searchbByDate(List&lt;String&gt; x,String inday,String inmonth,String inyear,String outday,String outmonth,String outyear) throws IncorrectDateException,NoPropertyAvailable{
+<span class="fc" id="L72">        List&lt;String&gt; available= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L73">        PropertyUnavailable p=new PropertyUnavailable(0,&quot;nu&quot;,&quot;prop&quot;,inday,inmonth,inyear,outday,outmonth,outyear);</span>
+<span class="fc" id="L74">        checkDateIsCorrect(p);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for(String prop : x) {</span>
+<span class="fc" id="L76">            int ok=1;</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">            for (PropertyUnavailable prop_un : propertyUnavailableRepository.find()) {</span>
+<span class="pc bpc" id="L78" title="1 of 4 branches missed.">                if (Objects.equals(prop, prop_un.getName()) &amp;&amp; p.compare(prop_un)==false) {</span>
+<span class="fc" id="L79">                    ok=0;</span>
+                }
+<span class="fc" id="L81">            }</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            if(ok==1)</span>
+<span class="fc" id="L83">                available.add(prop);</span>
+<span class="fc" id="L84">        }</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if(available.size()==0){</span>
+<span class="fc" id="L86">            throw new NoPropertyAvailable();</span>
+        }
+
+<span class="fc" id="L89">        return available;</span>
+    }
+
+    public static List&lt;String&gt; getAllUnavailable(String username) {
+<span class="nc" id="L93">        List&lt;String&gt; list = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        for (PropertyUnavailable propertyUnavailable : propertyUnavailableRepository.find()) {</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (Objects.equals(username, propertyUnavailable.getUsername()))</span>
+<span class="nc" id="L96">                list.add(propertyUnavailable.getName() + &quot; unavailable from &quot; + propertyUnavailable.getFirstDay() + '/' +</span>
+<span class="nc" id="L97">                        propertyUnavailable.getFirstMonth() + '/' + propertyUnavailable.getFirstYear() + &quot; to &quot; + propertyUnavailable.getLastDay() + '/' +</span>
+<span class="nc" id="L98">                        propertyUnavailable.getLastMonth() + '/' + propertyUnavailable.getLastYear());</span>
+<span class="nc" id="L99">        }</span>
+<span class="nc" id="L100">        return list;</span>
+    }
+    public static int getTheId() {
+<span class="nc" id="L103">        int id = 0;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        for (PropertyUnavailable propertyUnavailable : propertyUnavailableRepository.find())</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">                id = (id &gt; propertyUnavailable.getId() + 1) ? id : (propertyUnavailable.getId() + 1);</span>
+<span class="nc" id="L106">        return id;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
